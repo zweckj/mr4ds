@@ -1,6 +1,8 @@
 MRS for Trainers
 ================
 
++ [Collab Edit](http://collabedit.com/3spwp)
+
 + [Signup Sheet, please fill out before class!](https://microsoft.sharepoint.com/teams/ADS_education/_layouts/15/WopiFrame.aspx?sourcedoc=%7Bc7ff3008-a346-4264-aaac-2bc97df9e614%7D&action=default)
     * I'll use the signup sheet to email you, so add your email address if you want to be contacted with updates
 + Download Data as a zip file, and extract to directory
