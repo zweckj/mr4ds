@@ -14,10 +14,6 @@ MRS for Trainers
 
 	net use z:  \\dsvmeastsa.file.core.windows.net\dsvmdatadisk 
 
-	- __Southcentral US__: 
-
-	cmdkey /add:dsvmdatadisk.file.core.windows.net /user:dsvmdatadisk /pass:xhbh5CreqLsxX2jrtpHjOhDnv49EMPhfUA24JVcQxy08KdBjDXaCKc1ymbiNmXX9VIpak/7cJp1fFdqZEESnGA== 
-	net use z: \\dsvmdatadisk.file.core.windows.net\mydata 
 + Download data for dplyrXdf tutorial:
     * download.file("https://alizaidi.blob.core.windows.net/training/yellow_tripdata_2015.xdf", destfile = "yellow_tripdata_2015.xdf")
 
