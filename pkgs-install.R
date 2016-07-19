@@ -18,5 +18,5 @@ pks_missing <- pkgs_to_install[!(pkgs_to_install %in% installed.packages()[, 1])
 install.packages(pks_missing)
 
 # dev_pkgs <- c("RevolutionAnalytics/dplyrXdf",
-#               "rOpenSci/plotly")
+#               "ropensci/plotly")
 # devtools::install_github(dev_pkgs)
