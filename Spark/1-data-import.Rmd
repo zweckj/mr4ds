@@ -1,9 +1,17 @@
-# Create Spark Context ----------------------------------------------------
+# Create Spark Context
+
+The `sparklyr` package has a handy function for creating a Spark context. This differs from the method that is used by the `SparkR` package.
+
+```{r spark_context}
 
 library(sparklyr)
 sc <- spark_connect(master = "yarn-client")
 
-# Download Sample Data ----------------------------------------------
+```
+
+# Download Sample Data 
+
+```{r download_data}
 
 download.file("https://alizaidi.blob.core.windows.net/training/manhattan.RData", "manhattan.RData")
 download.file("https://alizaidi.blob.core.windows.net/training/sample_taxi.csv", "sample_taxi.csv")
@@ -14,10 +22,21 @@ rxHadoopCopyFromLocal("sample_taxi.csv", wasb_taxi)
 rxHadoopCommand("fs -cat /NYCTaxi/sample/sample_taxi.csv | head")
 
 
+```
 
-# Import-Data -------------------------------------------------------------
+
+
+# Import Data
+
+To import data from csv files, we can use the `spark_read_csv` function, which is basically a wrapper for the `read.df` function using the __databricks.spark.csv__ package.
+
+```{r import_csv}
 
 taxi <- spark_read_csv(sc,
                        path = "wasb://training@alizaidi.blob.core.windows.net/sample_taxi.csv",
                        "taxisample",
                        header = TRUE)
+
+
+```
+
