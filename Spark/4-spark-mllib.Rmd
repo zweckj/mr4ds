@@ -113,3 +113,28 @@ score_dtree <- predict(fit_dtree, partitions$test)
 
 ```
 
+
+# Create a Confusion Matrix
+
+Now that we have our predicted results, we could create a confusion matrix of our predictions vs the actuals.
+
+```{r confusion}
+
+conf_df <- function(tests = partitions$test,
+                    preds = score_dtree) {
+  
+  scored_df <- data.frame(predictions = preds, 
+                          actuals = unlist(collect(select(tests, good_tip))))
+  
+  return(scored_df)
+  
+}
+
+get_confusion <- function(scored_df = conf_df()) {
+  
+  return(table(scored_df$predictions, scored_df$actuals))
+  
+}
+
+```
+
