@@ -43,8 +43,7 @@ Training Discussions
 
 + Communication
     - newsletter for upcoming trainings
-    - signup locations
-    - 
+    - signup locations 
 
 + Content Development
     - take code and slides from central locations (data science process walkthroughs)
