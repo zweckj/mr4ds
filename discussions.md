@@ -20,11 +20,12 @@ Training Discussions
         4. topics: MRS, bots, cortana
     - CIS, August 1st and 2nd (Redmond)
     - MRS, August 29th - September 2nd (London)
-    - Day of the week?
-    - format of training? three days? two days?
-    - looking for september + october
+    - Question: 
+        * Preferred day of the week?
+    	* format of training? three days? two days?
+    - looking ahead for september + october cadences
 
-+ Bots content
++ Bots content request
     - anusa to link with pete for bot creation
 
 + Topics
@@ -39,19 +40,19 @@ Training Discussions
     - cognitive services
     - SQL
     - cosmos
-        * there are some bootcamps setup
+        * there are some bootcamps available, can leverage and deliver on cadence
 
 + Communication
     - newsletter for upcoming trainings
-    - signup locations 
+    - release of signups for cadence locations 
 
 + Content Development
-    - take code and slides from central locations (data science process walkthroughs)
-    - take customer data and apply it
+    - users would like take code and slides from central locations (e.g., data science process walkthroughs)
+    - apply it to customer data
     - coordinate with data science process team
 
 + Disseminating Materials
-    - jamie could help with visual studio online
+    - anusa: jamie could help with visual studio online
     - central repository, knowledge base
     - how about external partners?
         * sharepoint access?
@@ -64,7 +65,6 @@ Training Discussions
         * external trainers
         * internal teams dealing with presales/customers
         * ADS: be able to train pre-hack and then guide customer without needing a full training engagment through training teams
-
 
 + Deltas - News on New Developmnets
     - how do we notify the groups about new developments
