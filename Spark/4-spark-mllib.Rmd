@@ -108,7 +108,7 @@ fit_dforest <- partitions$training %>%
                    type = "classification")
 
 
-score_dtree <- predict(fit_dtree, partitions$test)
+score_dforest <- predict(fit_dforest, partitions$test)
 
 
 ```
