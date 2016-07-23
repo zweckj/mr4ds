@@ -136,5 +136,8 @@ get_confusion <- function(scored_df = conf_df()) {
   
 }
 
+# calculate the confusion matrix and display it
+get_confusion()
+
 ```
 
