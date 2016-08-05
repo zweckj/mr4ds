@@ -92,10 +92,16 @@ fit_dtree <- partitions$training %>%
                    type = "classification")
 
 
-score_dtree <- predict(fit_dtree, partitions$test)
-
-
 ```
+
+Let's try predicting with the fitted decision tree model:
+
+```{r pred_tree}
+
+score_dtree <- sdf_predict(fit_dtree, partitions$test)
+# score_dtree <- predict(fit_dtree, partitions$test)
+```
+
 
 That was for a single tree. Let's try to train a ensemble tree using the random forest function:
 
@@ -108,7 +114,8 @@ fit_dforest <- partitions$training %>%
                    type = "classification")
 
 
-score_dforest <- predict(fit_dforest, partitions$test)
+# score_dforest <- predict(fit_dforest, partitions$test)
+score_dforest <- sdf_predict(fit_dforest, partitions$test)
 
 
 ```
@@ -118,7 +125,9 @@ score_dforest <- predict(fit_dforest, partitions$test)
 
 Now that we have our predicted results, we could create a confusion matrix of our predictions vs the actuals.
 
-```{r confusion}
+We can consolidate predictions with the actual estimates into a single data.frame, from which we can easily calculate a confusion matrix. By encampsulating both into separate functions, it is easy to create confusion matrices for new predictions.
+
+```{r confusion_local_df}
 
 conf_df <- function(tests = partitions$test,
                     preds = score_dtree) {
@@ -136,8 +145,24 @@ get_confusion <- function(scored_df = conf_df()) {
   
 }
 
-# calculate the confusion matrix and display it
-get_confusion()
+conf_tree <- get_confusion()
+
+```
+
+
+If we want to work entirely with Spark DataFrames, we can use the `sdf_predict` function and then group_by the predictiosn and actuals:
+
+
+```{r confusion_group}
+
+sdf_conf_df <- function(predictions = score_dtree) {
+  
+  
+  conf_sdf <- predictions %>% group_by(prediction, good_tip) %>% tally()
+  
+  return(conf_sdf)
+  
+}
 
 ```
 
