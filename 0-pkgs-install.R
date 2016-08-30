@@ -7,6 +7,9 @@ r <- getOption('repos')
 r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-07-16/"
 options(repos = r)
 
+# If you have issues installing the rgeos package on linux:
+# on RHEL, centos `sudo yum install geos geos-devel`
+# on ubuntu `sudo apt-get install libgeos libgeos-dev`
 pkgs_to_install <- c("devtools", "data.table", "stringr", 
                      "broom", "magrittr", "dplyr",
                      "lubridate", "rgeos", "sp", "maptools",
