@@ -37,6 +37,22 @@ At the end of this session, you will have learned how to:
 * Create custom functions and use them for mutations and summarizations
 * Understand where and when to use the `dplyrXdf` package and when to use functions from the `RevoScaleR` package
 
+## The Microsoft R Family
+
+* ![Microsoft R Family](images/mr-family.png)
+
+## Microsoft R Component Stack
+
+* ![Microsoft R Family](images/mrcomponents.png)
+
+<aside class="notes">
+ScaleR: suite of HPA functions for data manipulation and modeling, plus some custom HPC functionality
+ConnectR: high speed and direct connectors
+DistributedR: framework for cross-platform distributed computation
+DeployR: web service development kit through APIs, java, js, .net
+</aside>
+
+
 ## Why dplyrXdf?
 ### Simplify Your Analysis Pipeline
 
