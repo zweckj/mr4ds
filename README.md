@@ -1,9 +1,9 @@
 MRS for Trainers
 ================
 
-+ [Collab Edit](http://collabedit.com/3spwp)
++ [Collab Edit](http://collabedit.com/2xutq)
 
-+ [Signup Sheet, please fill out before class!](https://microsoft.sharepoint.com/teams/ADS_education/_layouts/15/WopiFrame.aspx?sourcedoc=%7Bc7ff3008-a346-4264-aaac-2bc97df9e614%7D&action=default)
++ [Signup Sheet, please fill out before class!](https://microsoft.sharepoint.com/teams/ADS_education/_layouts/15/WopiFrame.aspx?sourcedoc=%7b6D621161-3AB7-41D5-9C23-1B2C6940EF0C%7d&file=ParticipantBackground-London08-29-16.xlsx&action=default)
     * I'll use the signup sheet to email you, so add your email address if you want to be contacted with updates
 + Download Data as a zip file, and extract to directory
     * [data link](https://alizaidi.blob.core.windows.net/training/data.zip)
@@ -20,24 +20,10 @@ MRS for Trainers
     * Spark, SparkR and RxSpark
 + Datasets
     * [NYC Taxi Data](http://www.andresmh.com/nyctaxitrips/)
-+ Compute Contexts: we will focus on the local compute contexts and RxSpark compute contexts. Subsequent trainings may be centered on
-    * LocalParallel
-    * RxInSqlServer
 
 # Logistics
-+ Need MRS 8.0.3
++ Need >=MRS 8.0.3
 + an R IDE
-
-You can use RTVS and the DSVM. For classrooms, we have been using RStudio Server, but we are transitioning to Jupyter. Hopefully, we can use JupyterHub to easily deploy classrooms later this year.
-
-
-## VMs
-
-+ [VM One](https://137.116.75.129:9999/tree)
-    * https://137.116.75.129:9999/tree
-+ [VM Two](https://137.116.67.7:9999/tree)
-    * https://137.116.67.7:9999/tree
-
 
 # Course Repository
 
