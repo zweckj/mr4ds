@@ -84,7 +84,7 @@ rxGetInfo(taxi_xdf)
 
 # create RxSpark compute context
 
-```{r rx_lin_mod}
+```{r rx_spark_context}
 
 
 computeContext <- RxSpark(consoleOutput=TRUE,
@@ -98,6 +98,16 @@ computeContext <- RxSpark(consoleOutput=TRUE,
 
 rxSetComputeContext(computeContext)
 
+
+
+```
+
+# Creating Linear Models
+
+Let's predict tip_pct as a function of distance and neighborhoods. In order to ensure that the neighbhorhood columns are treated as categorical, we will first convert them to factors. `RevoScaleR` and the `RxSpark` compute context are more picky about factor types than base R models, since they utilize data that is chunked and stored in distributed file systems. 
+
+```{r rx_factors}
+
 taxi_Fxdf <- RxXdfData(file.path(data_path, "taxiXdfFactors"),
                        fileSystem = hdfsFS)
 
@@ -106,9 +116,18 @@ rxFactors(inData = taxi_xdf, outFile = taxi_Fxdf,
           factorInfo = c("pickup_hour", "pickup_nhood")
 )
 
-system.time(linmod <- rxLinMod(tip_pct ~ trip_distance, 
-                               data = taxi_xdf, blocksPerRead = 2))
+system.time(linmod <- rxLinMod(tip_pct ~ pickup_nhood +  trip_distance, 
+                               data = taxi_xdf, cube = TRUE))
 
+
+```
+
+Now let's try to run our model. We will use the `cube = TRUE` argument, which partitions the data across each category of the `pickup_nhood` variable. This results in significant speedups.
+
+```{r rx_lm}
+
+system.time(linmod <- rxLinMod(tip_pct ~ pickup_nhood + pickup_hour + trip_distance, 
+                               data = taxi_Fxdf, cube = TRUE))
 
 ```
 

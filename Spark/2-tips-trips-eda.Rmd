@@ -1,9 +1,11 @@
 
 # Add Tip Column
 
-The `sparklyr` package can be used in conjuction with the `dplyr` package. It basically uses the SparkSQL/HiveSQL to convert `dplyr` functions into `SQL` equivalents that can be delivered to Spark SQL and the Catalyst optimizer.
+The `sparklyr` package can be used in conjuction with the `dplyr` package. It basically uses SparkSQL/HiveSQL to convert `dplyr` functions into `SQL` equivalents that can be delivered to Spark SQL and the Catalyst optimizer. The reason this works is that SQL DataFrames created by the `sparklyr` package all inherit the *tbl_sql* class.
 
 ```{r mutate}
+library(dplyr)
+class(taxi)
 sample_taxi <-  mutate(taxi, tip_pct = tip_amount/fare_amount)
 
 ```
