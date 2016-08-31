@@ -209,7 +209,7 @@ summary(default_model_logit)
 ```{r train_tree}
 default_model_tree <- estimate_model(mort_split$train, 
                                      model = rxDTree, 
-                                     cp = -1, method = 'class', 
+                                     cp = -1, minBucket = 10,
                                      reportProgress = 0)
 summary(default_model_tree)
 # library(RevoTreeView)
@@ -362,7 +362,7 @@ rxGetInfo(mort_xdf_factor, getVarInfo = TRUE, numRows = 4)
 
 - You know the drill! Change the parameters in `estimate_model`:
 
-```{r multiclass_tree}
+```{r multiclass_tree, eval = FALSE}
 tree_multiclass_year <- estimate_model(xdf_data = mort_xdf_factor,
                                     form = make_form(mort_xdf_factor,
                                                      "year",
@@ -377,7 +377,7 @@ tree_multiclass_year <- estimate_model(xdf_data = mort_xdf_factor,
 
 - Score the results
 
-```{r multiclass_prediction}
+```{r multiclass_prediction, eval = FALSE}
 
 multiclass_preds <- rxPredict(tree_multiclass_year,
                               data = mort_xdf_factor,
@@ -392,7 +392,7 @@ multiclass_preds <- rxPredict(tree_multiclass_year,
 - View the results
 - Predicted/scored column for each level of the response
 - Sum up to one
-```{r multiclass_view}
+```{r multiclass_view, eval = FALSE}
 
 rxGetInfo(multiclass_preds, numRows = 3)
 

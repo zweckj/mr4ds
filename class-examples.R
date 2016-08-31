@@ -131,10 +131,13 @@ tip_models <- taxi_df %>%
 
 test_set_fri <- taxi_df %>% filter(pickup_dow == "Fri")
 
-fri_model <- tip_df[tip_df$dropoff_dow == "Fri", 2]
+tip_df <- as.data.frame(tip_models)
+
+fri_model <- tip_models[tip_models$dropoff_dow == "Fri", 2]
+fri_model <- fri_model[[1]]
 
 test_scores_fri <- predict(fri_model[[1]], test_set_fri)
-
+test_set_fri$predicted_tips <- test_scores_fri
 
 tip_list <- tip_models[[2]]
 names(tip_list) <- tip_models[[1]]
@@ -143,3 +146,83 @@ names(tip_list) <- tip_models[[1]]
 fri_model <- tip_list$Fri
 
 test_scores_fri <- predict(fri_model, test_set_fri)
+
+
+
+ggplot(filter(test_set_fri, tip_amount < 20), 
+       aes(x = payment_type, y = tip_amount)) + 
+  geom_boxplot()
+
+
+
+# RxText ------------------------------------------------------------------
+
+mort_text <- RxTextData("/usr/lib64/microsoft-r/8.0/lib64/R/library/RevoScaleR/SampleData/mortDefaultSmall2009.csv")
+
+
+# rxSplit and Transforms --------------------------------------------------
+
+
+
+create_partition <- function(xdf = mort_xdf,
+                             partition_size = 0.75,
+                             output_path = "output/", ...) {
+  # rxDataStep(inData = xdf,
+  #            outFile = xdf,
+  #            transforms = list(
+  #              trainvalidate = factor(
+  #                ifelse(rbinom(.rxNumRows, 
+  #                              size = 1, prob = splitperc), 
+  #                       "train", "validate")
+  #              )
+  #            ),
+  #            transformObjects = list(splitperc = partition_size),
+  #            overwrite = TRUE, ...)
+  
+  splitDS <- rxSplit(inData = xdf, 
+                     outFilesBase = output_path,
+                     outFileSuffixes = c("train", "validate"),
+                     splitByFactor = "trainvalidate",
+                     transforms = list(
+                       trainvalidate = factor(
+                         ifelse(rbinom(.rxNumRows, 
+                                       size = 1, 
+                                       prob = splitperc), 
+                                "train", "validate")
+                       )
+                     ),
+                     transformObjects = list(splitperc = partition_size),
+                     overwrite = TRUE)
+  
+  return(splitDS) 
+  
+}
+
+
+mort_split <- create_partition(reportProgress = 0)
+names(mort_split) <- c("train", "validate")
+lapply(mort_split, rxGetInfo)
+
+# if you lose the variable mort_split
+mort_split <- list(train = RxXdfData("mortgage.trainvalidate.train.xdf"),
+                   validate = RxXdfData("mortgage.trainvalidate.validate.xdf"))
+
+
+# dtree model -------------------------------------------------------------
+
+
+default_model_tree <- estimate_model(mort_split$train, 
+                                     model = rxDTree,
+                                     minBucket = 10)
+x <- rxAddInheritance(default_model_tree)
+plot(x)
+
+plot(as.rpart(default_model_tree))
+
+
+rxGetInfo(mort_split$train, getVarInfo = TRUE)
+
+rxSummary(~., data = mort_split$train)
+
+library(RevoTreeView)
+plot(createTreeView(default_model_tree))
