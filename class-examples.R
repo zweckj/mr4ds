@@ -1,3 +1,11 @@
+
+# Include shared lib ------------------------------------------------------
+
+.libPaths(c(.libPaths(), "/Rlib/x86_64-pc-linux-gnu-library/3.2"))
+
+
+# Standard Evaluation in dplyr --------------------------------------------
+
 select_fn <- function(col_name) {
   select_df <- select_(taxi_df, col_name)
   return(select_df) 
