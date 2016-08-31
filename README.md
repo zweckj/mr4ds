@@ -11,7 +11,7 @@ MRS for Trainers
     * download.file("https://alizaidi.blob.core.windows.net/training/yellow_tripdata_2015.xdf", destfile = "yellow_tripdata_2015.xdf")
 
 
-# Decisions About Course Format
+# Course Syllabus
 
 + Topics
     * R Fundamentals
@@ -20,6 +20,15 @@ MRS for Trainers
     * Spark, SparkR and RxSpark
 + Datasets
     * [NYC Taxi Data](http://www.andresmh.com/nyctaxitrips/)
+
+# DSVMs
+
++ JupyterHub:
+	* https://londonrtrain.northeurope.cloudapp.azure.com:8000/hub/login
+	* https://londontwo.northeurope.cloudapp.azure.com:8000/hub/login
++ RStudio Server:
+	* http://londonrtrain.northeurope.cloudapp.azure.com:8787/
+	* http://londontwo.northeurope.cloudapp.azure.com:8787/
 
 # Logistics
 + Need >=MRS 8.0.3
