@@ -1,7 +1,12 @@
+library(dplyr)
+library(stringr)
+load(url("http://alizaidi.blob.core.windows.net/training/taxi_df.RData"))
+(taxi_df <- tbl_df(taxi_df))
 
 # Include shared lib ------------------------------------------------------
 
-.libPaths(c(.libPaths(), "/Rlib/x86_64-pc-linux-gnu-library/3.2"))
+.libPaths(c(.libPaths(), 
+            "/Rlib/x86_64-pc-linux-gnu-library/3.2"))
 
 
 # Standard Evaluation in dplyr --------------------------------------------
@@ -32,3 +37,109 @@ summarise(summarise(group_by(taxi_df, pickup_nhood, dropoff_nhood),
 taxi_df %>% group_by(pickup_nhood, dropoff_nhood) %>% 
   summarise(ave_tip_pct = mean(tip_pct)) %>% 
   arrange(desc(tip_pct))
+
+
+
+taxi_skinny <- taxi_df %>% 
+  select(pickup_nhood, dropoff_nhood, trip_distance)
+
+taxi_grouped <- taxi_skinny %>% 
+  group_by(pickup_nhood, dropoff_nhood)
+
+taxi_order <- taxi_grouped %>% 
+  arrange(pickup_nhood,
+          dropoff_nhood,
+          desc(trip_distance))
+
+taxi_order
+
+
+normalize_function <- function(x) {
+  
+  scale <- sd(x)
+  dist <- mean(x)
+  
+  # browser()
+  (x - dist)/scale
+}
+
+
+taxi_mutate <- taxi_grouped %>% 
+  mutate(scaled_value = normalize_function(trip_distance))
+  
+
+taxi_grouped
+
+taxi_summarise <- taxi_grouped %>% 
+  summarise(ave_dist = mean(trip_distance))
+
+taxi_mutate_summarized <- taxi_summarise %>% 
+  group_by_(c("pickup_nhood", "dropoff_nhood")) %>% 
+  mutate(scaled_value = normalize_function(ave_dist))
+
+iris_grouped <- iris %>% group_by(Species)
+
+iris_grouped %>% tally()
+
+iris_grouped[[3, "Species"]]
+
+pick_group <- function(df = iris,
+                       selection = iris_grouped[[3, "Species"]]) {
+  
+  df %>% filter_()
+
+  
+}
+
+
+taxi_df <- mutate(taxi_df, 
+                  tip_pct = tip_amount/fare_amount)
+
+tip_models <- taxi_df %>% 
+  group_by(dropoff_dow) %>%
+  sample_n(10^3) %>%  
+  do(lm_tip = lm(tip_pct ~ pickup_nhood + passenger_count + pickup_hour,
+                 data = .),
+     tip_pct = .$tip_pct) %>% 
+  mutate(ave_tip_pct = mean(tip_pct))
+
+
+length(tip_models$lm_tip[[1]]$fitted.values)
+
+lapply(tip_models$lm_tip, 
+       function(x) length(x$fitted.values))
+
+
+library(broom)
+taxi_models <- taxi_df  %>%  
+  group_by(dropoff_dow) %>% 
+  sample_n(10^3) %>% 
+  do(tidy(lm(tip_pct ~ pickup_nhood + passenger_count + pickup_hour,
+               data = .)))
+
+
+# scoring models ----------------------------------------------------------
+
+taxi_df <- mutate(taxi_df, 
+                  tip_pct = tip_amount/fare_amount)
+
+tip_models <- taxi_df %>% 
+  group_by(dropoff_dow) %>%
+  sample_n(10^3) %>%  
+  do(lm_tip = lm(tip_pct ~ trip_distance,
+                 data = .))
+
+test_set_fri <- taxi_df %>% filter(pickup_dow == "Fri")
+
+fri_model <- tip_df[tip_df$dropoff_dow == "Fri", 2]
+
+test_scores_fri <- predict(fri_model[[1]], test_set_fri)
+
+
+tip_list <- tip_models[[2]]
+names(tip_list) <- tip_models[[1]]
+
+
+fri_model <- tip_list$Fri
+
+test_scores_fri <- predict(fri_model, test_set_fri)
