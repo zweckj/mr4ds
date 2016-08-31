@@ -4,7 +4,7 @@
 # update cran
 r <- getOption('repos')
 # set mirror to something a bit more recent
-r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-07-16/"
+r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-08-29/"
 options(repos = r)
 
 # If you have issues installing the rgeos package on linux:

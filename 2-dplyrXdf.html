@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.2.0/css/reveal.css"/>
 
 
 <style type="text/css">
@@ -50,7 +50,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.3.0/css/theme/night.css" id="theme">
+<link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.2.0/css/theme/night.css" id="theme">
 
 <style type="text/css">
 .reveal section img {
@@ -108,11 +108,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       var link = document.createElement( 'link' );
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? '2-dplyrXdf_files/reveal.js-3.3.0/css/print/pdf.css' : '2-dplyrXdf_files/reveal.js-3.3.0/css/print/paper.css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '2-dplyrXdf_files/reveal.js-3.2.0/css/print/pdf.css' : '2-dplyrXdf_files/reveal.js-3.2.0/css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
     <!--[if lt IE 9]>
-    <script src="2-dplyrXdf_files/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <script src="2-dplyrXdf_files/reveal.js-3.2.0/lib/js/html5shiv.js"></script>
     <![endif]-->
 
 </head>
@@ -156,7 +156,12 @@ ScaleR: suite of HPA functions for data manipulation and modeling, plus some cus
 <li class="fragment">The <code>RevoScaleR</code> package enables R users to manipulate data that is larger than memory</li>
 <li class="fragment">It introduces a new data type, called an <code>xdf</code> (short for eXternal Data Frame), which are highly efficient out-of-memory objects</li>
 <li class="fragment">However, many of the <code>RevoScaleR</code> functions have a dramatically different syntax from base R functions</li>
-<li class="fragment">The <code>dplyr</code> package has becme exceptionally popular, due to its appealing syntax, and since it’s extensible, we have created a new package called <code>dplyrXdf</code> that exposes most of the <code>dplyr</code> functionality to <code>xdf</code> objects</li>
+<li class="fragment">The <code>dplyr</code> package is an exceptionally popular, due to its appealing syntax, and it’s extensibility</li>
+</ul>
+</section><section id="simpler-analysis-with-dplyrxdf" class="slide level2">
+<h1>Simpler Analysis with dplyrXdf</h1>
+<ul>
+<li class="fragment">The <code>dplyrXdf</code> that exposes most of the <code>dplyr</code> functionality to <code>xdf</code> objects</li>
 <li class="fragment">Many data analysis pipelines require creating many intermediate datasets, which are only needed for their role in deriving a final dataset, but have no/little use on their own</li>
 <li class="fragment">The <code>dplyrXdf</code> abstracts this task of file management, so that you can focus on the data itself, rather than the management of intermediate files</li>
 <li class="fragment">Unlike <code>dplyr</code>, or other base R packages, <code>dplyrXdf</code> allows you to work with data residing <em>outside</em> of memory, and therefore scales to datasets of arbitrary size</li>
@@ -232,11 +237,13 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
 <h3 id="the-rxdatastep-way">The rxDataStep Way</h3>
 <ul>
 <li class="fragment">All the functionality exposed by the <code>dplyrXdf</code> package can also be completed by using the <code>rxDataStep</code> function in the <code>RevoScaleR</code> package included with your MRS installation</li>
-<li class="fragment">In fact, <code>dplyrXdf</code> consists almost entirely of wrapper functions that call on other <code>rx</code> functions</li>
-<li class="fragment"><h2 id="lets-compare-the-workflow-for-adding-a-new-column-to-a-dataset-with-rxdatastep-vs-dplyrxdf">Let’s compare the workflow for adding a new column to a dataset with <code>rxDataStep</code> vs <code>dplyrXdf</code></h2></li>
+<li class="fragment">In fact, <code>dplyrXdf</code> consists almost entirely of wrapper functions that call on other RevoScaleR functions</li>
+<li class="fragment">Let’s compare the workflow for adding a new column to a dataset with <code>rxDataStep</code> vs <code>dplyrXdf</code></li>
 </ul>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_xdf %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">getVarInfo =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## File name: /home/alizaidi/coursedev/R-cadence/data/yellow_tripdata_2015.xdf 
+<pre><code>## File name: /home/alizaidi/R-cadence/data/yellow_tripdata_2015.xdf 
 ## Number of observations: 37696906 
 ## Number of variables: 16 
 ## Number of blocks: 21 
@@ -279,12 +286,12 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
            <span class="dt">transforms =</span> <span class="kw">list</span>(<span class="dt">tip_pct =</span> tip_amount/fare_amount),
            <span class="dt">overwrite =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   5.907   2.649  49.154</code></pre>
+##   5.547   2.801  49.690</code></pre>
 </section><section id="data-transforms-1" class="slide level2">
 <h1>Data Transforms</h1>
 <h3 id="the-rxdatastep-way-1">The rxDataStep Way</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rxGetInfo</span>(<span class="kw">RxXdfData</span>(taxi_transform), <span class="dt">numRows =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## File name: /home/alizaidi/coursedev/R-cadence/data/taxi_transform.xdf 
+<pre><code>## File name: /home/alizaidi/R-cadence/data/taxi_transform.xdf 
 ## Number of observations: 37696906 
 ## Number of variables: 17 
 ## Number of blocks: 21 
@@ -310,9 +317,9 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(taxi_transform &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">tip_pct =</span> tip_amount/fare_amount))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   4.432   2.918  47.995</code></pre>
+##   3.687   2.484  46.989</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">numRows =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## File name: /tmp/Rtmp4z0F0S/filef1a9586aae73.xdf 
+<pre><code>## File name: /tmp/RtmpKdrAyN/file4dac20396bba.xdf 
 ## Number of observations: 37696906 
 ## Number of variables: 17 
 ## Number of blocks: 21 
@@ -341,7 +348,7 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform@file</code></pre></div>
-<pre><code>## [1] &quot;/tmp/Rtmp4z0F0S/filef1a9586aae73.xdf&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpKdrAyN/file4dac20396bba.xdf&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">persist</span>(taxi_transform, <span class="dt">outFile =</span> <span class="st">&quot;data/taxiTransform.xdf&quot;</span>) -&gt;<span class="st"> </span>taxi_transform</code></pre></div>
 </section><section id="using-dplyrxdf-for-aggregations" class="slide level2">
 <h1>Using dplyrXdf for Aggregations</h1>
@@ -410,7 +417,7 @@ taxi_group %&gt;%<span class="st"> </span>head</code></pre></div>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_df %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">getVarInfo =</span> <span class="ot">TRUE</span>, <span class="dt">numRows =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>## File name: /tmp/Rtmp4z0F0S/filef1a95b4f05b3.xdf 
+<pre><code>## File name: /tmp/RtmpKdrAyN/file4dac6a04ad1e.xdf 
 ## Number of observations: 408 
 ## Number of variables: 4 
 ## Number of blocks: 1 
@@ -429,6 +436,8 @@ taxi_group %&gt;%<span class="st"> </span>head</code></pre></div>
 ## 3      East Harlem Battery Park 0.1102473 9.982296
 ## 4     East Village Battery Park 0.1401632 3.952964
 ## 5 Garment District Battery Park 0.1312443 3.874708</code></pre>
+</section><section class="slide level2">
+
 <p>Alternatively, we can encapsulate this script into a function, so that we can easily call it in a functional pipeline.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_hood_sum &lt;-<span class="st"> </span>function(<span class="dt">taxi_data =</span> taxi_df, ...) {
   
@@ -443,34 +452,55 @@ taxi_group %&gt;%<span class="st"> </span>head</code></pre></div>
   <span class="kw">return</span>(sum_df)
   
 }</code></pre></div>
+</section><section class="slide level2">
+
+<p>The resulting summary object isn’t very large (about 408 rows in this case), so it shouldn’t cause any memory overhead issues if we covert it now to a <code>data.frame</code>. We can plot our results using our favorite plotting library.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tile_plot_hood &lt;-<span class="st"> </span>function(<span class="dt">df =</span> <span class="kw">taxi_hood_sum</span>()) {
+  
+  <span class="kw">library</span>(ggplot2)
+  
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> pickup_nhood, <span class="dt">y =</span> dropoff_nhood)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> ave_tip), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme_bw</span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>),
+          <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;steelblue&quot;</span>) -&gt;<span class="st"> </span>gplot
+  
+  <span class="kw">return</span>(gplot)
+}</code></pre></div>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tile_plot_hood</span>(<span class="kw">as.data.frame</span>(sum_df))</code></pre></div>
 <p><img src="2-dplyrXdf_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
 </section></section>
 <section><section id="split-and-combining-operations-with-doxdf" class="titleslide slide level1"><h1>Split and Combining Operations with doXdf</h1></section><section id="custom-functions-across-groups" class="slide level2">
 <h1>Custom functions across groups</h1>
-<p>The do verb is an exception to the rule that dplyrXdf verbs write their output as xdf files. This is because do executes arbitrary R code, and can return arbitrary R objects; while a data frame is capable of storing these objects, an xdf file is limited to character and numeric vectors only.</p>
-</section><section id="the-doxdf-verb-is-similar-to-do-but-where-do-splits-its-input-into-one-data-frame-per-group-doxdf-splits-it-into-one-xdf-file-per-group.-this-allows-do-like-functionality-with-grouped-data-where-each-group-can-be-arbitrarily-large.-the-syntax-for-the-two-functions-is-essentially-the-same-although-the-code-passed-to-doxdf-must-obviously-know-how-to-handle-xdfs." class="slide level2">
-<h1>The doXdf verb is similar to do, but where do splits its input into one data frame per group, doXdf splits it into one xdf file per group. This allows do-like functionality with grouped data, where each group can be arbitrarily large. The syntax for the two functions is essentially the same, although the code passed to doXdf must obviously know how to handle xdfs.</h1>
+<p>The <code>do</code> verb is an exception to the rule that dplyrXdf verbs write their output as xdf files. This is because do executes arbitrary R code, and can return arbitrary R objects; while a data frame is capable of storing these objects, an xdf file is limited to character and numeric vectors only.</p>
+</section><section id="custom-functions-across-groups-1" class="slide level2">
+<h1>Custom functions across groups</h1>
+<p>The doXdf verb is similar to do, but where do splits its input into one data frame per group, doXdf splits it into one xdf file per group. This allows do-like functionality with grouped data, where each group can be arbitrarily large. The syntax for the two functions is essentially the same, although the code passed to doXdf must obviously know how to handle xdfs.</p>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_models &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">rxLinMod</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .))</code></pre></div>
 </section><section id="memory-issues" class="slide level2">
 <h1>Memory Issues</h1>
 <p>All the caveats that go with working with <code>data.frames</code> apply here. While each grouped partition is it’s own <code>RxXdfData</code> object, the return value must be a <code>data.frame</code>, and hence, must fit in memory. Moreover, the function you apply against the splits will determine how they are operated. If you use an <code>rx</code> function, you’ll get the nice fault-tolerant, parallel execution strategies the <code>RevoScaleR</code> package provides, but for any vanilla/CRAN function will work with data.frames and can easily cause your session to crash.</p>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 taxi_broom &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">glance</span>(<span class="kw">lm</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .)))</code></pre></div>
 </section></section>
     </div>
   </div>
 
-  <script src="2-dplyrXdf_files/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="2-dplyrXdf_files/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="2-dplyrXdf_files/reveal.js-3.2.0/lib/js/head.min.js"></script>
+  <script src="2-dplyrXdf_files/reveal.js-3.2.0/js/reveal.js"></script>
 
   <script>
 
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Push each slide change to the browser history
-        history: true,
         // Vertical centering of slides
         center: true,
         // Transition style
@@ -479,10 +509,7 @@ taxi_broom &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
-        dependencies: [
-          { src: '2-dplyrXdf_files/reveal.js-3.3.0/plugin/notes/notes.js', async: true },
-          { src: '2-dplyrXdf_files/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
-        ]
+        dependencies: []
       });
     </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
