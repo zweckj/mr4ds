@@ -226,3 +226,68 @@ rxSummary(~., data = mort_split$train)
 
 library(RevoTreeView)
 plot(createTreeView(default_model_tree))
+
+default_tree_scored <- rxPredict(default_model_tree,
+                                 mort_split$validate,
+                                 "scored.xdf",
+                                 writeModelVars = TRUE,
+                                 predVarNames = c("pred_tree_current",
+                                                  "pred_tree_default"))
+
+scored_xdf <- RxXdfData("scored.xdf")
+
+rxGetInfo(scored_xdf, numRows = 5)
+
+
+rxRoc(actualVarName = "default", 
+      predVarNames = c("pred_logit_default", "pred_tree_default"), 
+      data = scored_xdf)
+
+
+rxRocCurve(actualVarName = "default", 
+           predVarNames = c("pred_logit_default",
+                            "pred_tree_default"), 
+           data = scored_xdf)
+
+
+# ensemble algorithms -----------------------------------------------------
+
+
+rxDForest
+rxBTrees
+
+system.time(default_model_forest <- estimate_model(mort_split$train,
+                                                   model = rxDForest))
+
+rxPredict(modelObject = default_model_forest,
+          data = mort_split$validate,
+          outData = "scored.xdf",
+          writeModelVars = TRUE,
+          type = "prob",
+          predVarNames = c("pred_forest_current",
+                           "pred_forest_default",
+                           "pred_forest_label"))
+
+rxGetInfo(scored_xdf, 
+          getVarInfo = TRUE,
+          numRows = 5)
+
+system.time(default_model_btree <- estimate_model(mort_split$train,
+                                                  model = rxBTrees)
+)
+
+
+rxPredict(modelObject = default_model_btree,
+          data = mort_split$validate,
+          outData = "scored.xdf",
+          writeModelVars = TRUE,
+          type = "prob",
+          predVarNames = "pred_btree_default")
+
+
+rxRocCurve(actualVarName = "default", 
+           predVarNames = c("pred_logit_default",
+                            "pred_tree_default",
+                            "pred_forest_default",
+                            "pred_btree_default"), 
+           data = scored_xdf)
