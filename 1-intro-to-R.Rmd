@@ -685,6 +685,7 @@ taxi_df %>% sample_n(10^4) %>%
 ```
 
 ---
+
 Where are our results? 
 ![digging](http://i.giphy.com/oEnTTI3ZdK6ic.gif)
 
