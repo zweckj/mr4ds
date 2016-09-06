@@ -368,7 +368,7 @@ tree_multiclass_year <- estimate_model(xdf_data = mort_xdf_factor,
                                                      "year",
                                                      vars_to_skip = c("default",
                                                                       "trainvalidate")),
-                                    model = rxDTree, type = "class")
+                                    model = rxDTree)
 
 
 ```
