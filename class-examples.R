@@ -257,7 +257,8 @@ rxDForest
 rxBTrees
 
 system.time(default_model_forest <- estimate_model(mort_split$train,
-                                                   model = rxDForest))
+                                                   model = rxDForest,
+                                                   importance = TRUE))
 
 rxPredict(modelObject = default_model_forest,
           data = mort_split$validate,
@@ -291,3 +292,15 @@ rxRocCurve(actualVarName = "default",
                             "pred_forest_default",
                             "pred_btree_default"), 
            data = scored_xdf)
+
+
+
+# Saving objects as compressed Rds files ----------------------------------
+
+
+saveRDS(object = default_model_btree, file = "defaultbtree.rds")
+
+rm(default_model_btree)
+
+default_model_btree <- readRDS("defaultbtree.rds")
+
