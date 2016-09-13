@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Microsoft R Training
 ====================
 
@@ -86,5 +85,3 @@ We are still in the process of transitioning our course materials from our Revol
 
 * [MRS for SAS Users](https://github.com/Azure/Cortana-Intelligence-Gallery-Content/blob/master/Tutorials/MRS-for-SAS-Users/MRS%20for%20SAS%20Users.md)
 * [R for SAS Users](https://github.com/Azure/Cortana-Intelligence-Gallery-Content/blob/master/Tutorials/R-for-SAS-Users/R%20for%20SAS%20Users.md)
-
->>>>>>> 8746186e5ec2ed8857f8fed87d7475f8638fc212
