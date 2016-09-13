@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.2.0/css/reveal.css"/>
+  <link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.3.0/css/reveal.css"/>
 
 
 <style type="text/css">
@@ -50,7 +50,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.2.0/css/theme/night.css" id="theme">
+<link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.3.0/css/theme/night.css" id="theme">
 
 <style type="text/css">
 .reveal section img {
@@ -108,11 +108,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       var link = document.createElement( 'link' );
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? '2-dplyrXdf_files/reveal.js-3.2.0/css/print/pdf.css' : '2-dplyrXdf_files/reveal.js-3.2.0/css/print/paper.css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '2-dplyrXdf_files/reveal.js-3.3.0/css/print/pdf.css' : '2-dplyrXdf_files/reveal.js-3.3.0/css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
     <!--[if lt IE 9]>
-    <script src="2-dplyrXdf_files/reveal.js-3.2.0/lib/js/html5shiv.js"></script>
+    <script src="2-dplyrXdf_files/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
     <![endif]-->
 
 </head>
@@ -243,7 +243,7 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_xdf %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">getVarInfo =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## File name: /home/alizaidi/R-cadence/data/yellow_tripdata_2015.xdf 
+<pre><code>## File name: /home/alizaidi/coursedev/R-cadence/data/yellow_tripdata_2015.xdf 
 ## Number of observations: 37696906 
 ## Number of variables: 16 
 ## Number of blocks: 21 
@@ -286,12 +286,12 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
            <span class="dt">transforms =</span> <span class="kw">list</span>(<span class="dt">tip_pct =</span> tip_amount/fare_amount),
            <span class="dt">overwrite =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   5.547   2.801  49.690</code></pre>
+##   6.011   2.792  49.536</code></pre>
 </section><section id="data-transforms-1" class="slide level2">
 <h1>Data Transforms</h1>
 <h3 id="the-rxdatastep-way-1">The rxDataStep Way</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rxGetInfo</span>(<span class="kw">RxXdfData</span>(taxi_transform), <span class="dt">numRows =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## File name: /home/alizaidi/R-cadence/data/taxi_transform.xdf 
+<pre><code>## File name: /home/alizaidi/coursedev/R-cadence/data/taxi_transform.xdf 
 ## Number of observations: 37696906 
 ## Number of variables: 17 
 ## Number of blocks: 21 
@@ -317,9 +317,9 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(taxi_transform &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">tip_pct =</span> tip_amount/fare_amount))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   3.687   2.484  46.989</code></pre>
+##   4.401   2.821  47.633</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">numRows =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## File name: /tmp/RtmpKdrAyN/file4dac20396bba.xdf 
+<pre><code>## File name: /tmp/RtmpKdySFj/fileb7e75d829dcf.xdf 
 ## Number of observations: 37696906 
 ## Number of variables: 17 
 ## Number of blocks: 21 
@@ -348,7 +348,7 @@ taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform@file</code></pre></div>
-<pre><code>## [1] &quot;/tmp/RtmpKdrAyN/file4dac20396bba.xdf&quot;</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpKdySFj/fileb7e75d829dcf.xdf&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">persist</span>(taxi_transform, <span class="dt">outFile =</span> <span class="st">&quot;data/taxiTransform.xdf&quot;</span>) -&gt;<span class="st"> </span>taxi_transform</code></pre></div>
 </section><section id="using-dplyrxdf-for-aggregations" class="slide level2">
 <h1>Using dplyrXdf for Aggregations</h1>
@@ -417,7 +417,7 @@ taxi_group %&gt;%<span class="st"> </span>head</code></pre></div>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_df %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">getVarInfo =</span> <span class="ot">TRUE</span>, <span class="dt">numRows =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>## File name: /tmp/RtmpKdrAyN/file4dac6a04ad1e.xdf 
+<pre><code>## File name: /tmp/RtmpKdySFj/fileb7e7287839c2.xdf 
 ## Number of observations: 408 
 ## Number of variables: 4 
 ## Number of blocks: 1 
@@ -481,26 +481,62 @@ taxi_group %&gt;%<span class="st"> </span>head</code></pre></div>
 <p>The doXdf verb is similar to do, but where do splits its input into one data frame per group, doXdf splits it into one xdf file per group. This allows do-like functionality with grouped data, where each group can be arbitrarily large. The syntax for the two functions is essentially the same, although the code passed to doXdf must obviously know how to handle xdfs.</p>
 </section><section class="slide level2">
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_models &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">rxLinMod</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_models &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">rxLinMod</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .))
+taxi_models</code></pre></div>
+<pre><code>##   pickup_dow
+## 1        Fri
+## 2        Mon
+## 3        Sat
+## 4        Sun
+## 5        Thu
+## 6        Tue
+## 7        Wed
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  model
+## 1                 1.656774, 0.0007725297, 36846416, 1, 2, FALSE, FALSE, 0.001035926, 7.730892e-06, 1599.318, 99.92763, 2.220446e-16, 2.220446e-16, 53253792, 36908930, 2.502106, 6.260533, 0.001693757, 0, 2, 5885508, 2, tip_amount, 0, 10795589, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Fri.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Fri.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0x20efa2c8&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 9985.532, 1, 5885508, 0.001693587, 5885510, 0, Revo
+## 2                        0.08748307, 0.1273401, 20035995, 1, 2, FALSE, FALSE, 0.001422496, 8.615129e-05, 61.49969, 1478.099, 2.220446e-16, 2.220446e-16, 42265377, 29297253, 2.058882, 4.238995, 0.3161135, 0, 2, 4726591, 2, tip_amount, 0, 6826744, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Mon.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Mon.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0x205c1de0&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 2184777, 1, 4726591, 0.3161134, 4726593, 0, Revo
+## 3                   1.425281, 0.002586152, 28378377, 1, 2, FALSE, FALSE, 0.0008801076, 1.405561e-05, 1619.439, 183.9944, 2.220446e-16, 2.220446e-16, 41589137, 28534296, 2.146075, 4.605638, 0.005464266, 0, 2, 6161660, 2, tip_amount, 0, 9410593, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Sat.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Sat.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0xb240b70&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 33853.93, 1, 6161660, 0.005464104, 6161662, 0, Revo
+## 4 2.313509, 0.0004142143, 1.560717e+13, 1, 2, FALSE, FALSE, 0.7571328, 0.003428908, 3.055619, 0.1208006, 0.002245976, 0.903849, 1.560719e+13, 1.560717e+13, 1728.124, 2986413, 2.792314e-09, 0.903849, 2, 5226057, 2, tip_amount, 0, 77918366, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Sun.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Sun.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0x171ff388&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 0.01459279, 1, 5226057, -1.885565e-07, 5226059, 0, Revo
+## 5                         0.2319764, 0.1180816, 24255391, 1, 2, FALSE, FALSE, 0.001340523, 8.138576e-05, 173.0492, 1450.888, 2.220446e-16, 2.220446e-16, 49660587, 33338877, 2.077268, 4.315041, 0.2724593, 0, 2, 5621126, 2, tip_amount, 0, 8218692, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Thu.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Thu.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0x141a0ca8&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 2105075, 1, 5621126, 0.2724591, 5621128, 0, Revo
+## 6                      1.60381, 0.007196481, 27567401, 1, 2, FALSE, FALSE, 0.001087692, 2.400197e-05, 1474.508, 299.8287, 2.220446e-16, 2.220446e-16, 42433690, 28061399, 2.344173, 5.495147, 0.01760421, 0, 2, 5016681, 2, tip_amount, 0, 8547754, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Tue.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Tue.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0x13320e68&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 89897.27, 1, 5016681, 0.01760401, 5016683, 0, Revo
+## 7                         0.01153894, 0.138617, 19286614, 1, 2, FALSE, FALSE, 0.001377781, 8.666624e-05, 8.375015, 1599.435, 2.220446e-16, 2.220446e-16, 44055770, 29038790, 1.952469, 3.812134, 0.3358327, 0, 2, 5059269, 2, tip_amount, 0, 6770264, tip_amount~fare_amount, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Wed.xdf, TRUE, native, 3, TRUE, /tmp/RtmpKdySFj/fileb7e74458e73f.pickup_dow.Wed.xdf, , TRUE, FALSE, 1, RxXdfData, 0, TRUE, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, tip_amount, fare_amount, &lt;environment: 0x11a7c898&gt;, FALSE, , , , FALSE, FALSE, 0, -1, FALSE, FALSE, FALSE, FALSE, 1e-12, 1e-14, FALSE, 1000, AIC, Competitive, -1, -1, FALSE, 0, 2, FALSE, FALSE, tip_amount ~ fare_amount, rxLinMod(formula = tip_amount ~ fare_amount, data = .), 2558193, 1, 5059269, 0.3358326, 5059271, 0, Revo</code></pre>
 </section><section id="memory-issues" class="slide level2">
 <h1>Memory Issues</h1>
 <p>All the caveats that go with working with <code>data.frames</code> apply here. While each grouped partition is it’s own <code>RxXdfData</code> object, the return value must be a <code>data.frame</code>, and hence, must fit in memory. Moreover, the function you apply against the splits will determine how they are operated. If you use an <code>rx</code> function, you’ll get the nice fault-tolerant, parallel execution strategies the <code>RevoScaleR</code> package provides, but for any vanilla/CRAN function will work with data.frames and can easily cause your session to crash.</p>
 </section><section class="slide level2">
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-taxi_broom &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">glance</span>(<span class="kw">lm</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .)))</code></pre></div>
+taxi_broom &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="kw">glance</span>(<span class="kw">lm</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .)))
+taxi_broom</code></pre></div>
+<pre><code>##   pickup_dow    r.squared adj.r.squared       sigma    statistic  p.value
+## 1        Fri 1.693757e-03  1.693587e-03    2.502106 9.985532e+03 0.000000
+## 2        Mon 3.161135e-01  3.161134e-01    2.058882 2.184777e+06 0.000000
+## 3        Sat 5.464266e-03  5.464104e-03    2.146075 3.385393e+04 0.000000
+## 4        Sun 2.792314e-09 -1.885565e-07 1728.124192 1.459279e-02 0.903849
+## 5        Thu 2.724593e-01  2.724591e-01    2.077268 2.105075e+06 0.000000
+## 6        Tue 1.760421e-02  1.760401e-02    2.344173 8.989727e+04 0.000000
+## 7        Wed 3.358327e-01  3.358326e-01    1.952469 2.558193e+06 0.000000
+##   df    logLik      AIC      BIC     deviance df.residual
+## 1  2 -13748969 27497945 27497985 3.684642e+07     5885508
+## 2  2 -10120115 20240236 20240276 2.003600e+07     4726591
+## 3  2 -13448314 26896634 26896675 2.837838e+07     6161660
+## 4  2 -46374637 92749281 92749321 1.560717e+13     5226057
+## 5  2 -12085379 24170764 24170805 2.425539e+07     5621126
+## 6  2 -11392240 22784486 22784526 2.756740e+07     5016681
+## 7  2 -10563925 21127855 21127896 1.928661e+07     5059269</code></pre>
 </section></section>
     </div>
   </div>
 
-  <script src="2-dplyrXdf_files/reveal.js-3.2.0/lib/js/head.min.js"></script>
-  <script src="2-dplyrXdf_files/reveal.js-3.2.0/js/reveal.js"></script>
+  <script src="2-dplyrXdf_files/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="2-dplyrXdf_files/reveal.js-3.3.0/js/reveal.js"></script>
 
   <script>
 
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
         // Vertical centering of slides
         center: true,
         // Transition style
@@ -509,7 +545,10 @@ taxi_broom &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
-        dependencies: []
+        dependencies: [
+          { src: '2-dplyrXdf_files/reveal.js-3.3.0/plugin/notes/notes.js', async: true },
+          { src: '2-dplyrXdf_files/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
+        ]
       });
     </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->

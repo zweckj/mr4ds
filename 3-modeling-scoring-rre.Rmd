@@ -3,19 +3,21 @@ title: "Modeling and Scoring with Revolution R Enterprise"
 author: "Ali Zaidi"
 date: "August 16, 2016"
 output:
-  revealjs::revealjs_presentation:
-    theme: night
-    transition: default
-    self_contained: false
-    reveal_plugins: ["zoom", "notes"]
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
   ioslides_presentation:
-    logo: logo-130833979438186239.png
+    logo: images/clark-logo.png
     smaller: yes
     widescreen: yes
   beamer_presentation: default
+  revealjs::revealjs_presentation:
+    reveal_options:
+      previewLinks: yes
+      slideNumber: yes
+    reveal_plugins:
+    - zoom
+    - notes
+    self_contained: no
+    theme: night
+    transition: default
   slidy_presentation: default
   transition: rotate
 ---

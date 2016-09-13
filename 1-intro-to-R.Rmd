@@ -1,18 +1,8 @@
 ---
 title: 'Introduction to R: _Functional, Object-Based Computing for Data Analysis_'
-author: "[Ali Zaidi, alizaidi@microsoft.com](mailto:alizaidi@microsoft.com)"
+author: '[Ali Zaidi, alizaidi@microsoft.com](mailto:alizaidi@microsoft.com)'
 date: "August 30th, 2016"
 output:
-  revealjs::revealjs_presentation:
-    theme: night
-    incremental: true
-    self_contained: false
-    css: slides.css
-    reveal_plugins: ["zoom", "notes"]
-    slideNumber: true
-    previewLinks: true
-    viewDistance: 3
-    center: true
   ioslides_presentation:
     logo: images/clark-logo.png
     smaller: yes
@@ -20,8 +10,20 @@ output:
   html_notebook:
     toc: yes
   html_document:
+    keep_md: yes
     toc: yes
-    keep_md: true
+  revealjs::revealjs_presentation:
+    center: yes
+    css: slides.css
+    incremental: yes
+    previewLinks: yes
+    reveal_plugins:
+    - zoom
+    - notes
+    self_contained: no
+    slideNumber: yes
+    theme: night
+    viewDistance: 3
 ---
 
 ```{r global_options, include=FALSE}

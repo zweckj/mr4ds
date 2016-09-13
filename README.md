@@ -1,5 +1,5 @@
-MRS for Trainers
-================
+Microsoft R Training
+====================
 
 + [Collab Edit](http://collabedit.com/2xutq)
 + [Survey Link](https://www.surveymonkey.co.uk/r/3WPD6M3)
@@ -31,6 +31,7 @@ MRS for Trainers
 	* http://londontwo.northeurope.cloudapp.azure.com:8787/
 
 # Logistics
+
 + Need >=MRS 8.0.3
 + an R IDE
 
