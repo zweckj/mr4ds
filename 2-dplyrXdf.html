@@ -575,3 +575,543 @@ taxi_broom</code></pre></div>
 
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Microsoft Data Science Team" />
+  <meta name="dcterms.date" content="2016-08-30" />
+  <title>Data Manipulation with dplyrXdf</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.2.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="2-dplyrXdf_files/reveal.js-3.2.0/css/theme/night.css" id="theme">
+
+<style type="text/css">
+.reveal section img {
+  background: rgba(255, 255, 255, 0.85);
+}
+</style>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="slides.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '2-dplyrXdf_files/reveal.js-3.2.0/css/print/pdf.css' : '2-dplyrXdf_files/reveal.js-3.2.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="2-dplyrXdf_files/reveal.js-3.2.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Data Manipulation with dplyrXdf</h1>
+    <h2 class="author">Microsoft Data Science Team</h2>
+    <h3 class="date">August 30, 2016</h3>
+</section>
+
+<section><section id="introduction" class="titleslide slide level1"><h1>Introduction</h1></section><section id="overview" class="slide level2">
+<h1>Overview</h1>
+<h3 id="plan">Plan</h3>
+<p>At the end of this session, you will have learned how to:</p>
+<ul>
+<li class="fragment">Take advantage of the verbs and syntax you learned from the <code>dplyr</code> module to manipulate <code>RxXdfData</code> data objects</li>
+<li class="fragment">Summarize your <code>RxXdfData</code> objects quickly and easily</li>
+<li class="fragment">Create custom functions and use them for mutations and summarizations</li>
+<li class="fragment">Understand where and when to use the <code>dplyrXdf</code> package and when to use functions from the <code>RevoScaleR</code> package</li>
+</ul>
+</section><section id="the-microsoft-r-family" class="slide level2">
+<h1>The Microsoft R Family</h1>
+<ul>
+<li class="fragment"><img src="images/mr-family.png" alt="Microsoft R Family" /></li>
+</ul>
+</section><section id="microsoft-r-component-stack" class="slide level2">
+<h1>Microsoft R Component Stack</h1>
+<ul>
+<li class="fragment"><img src="images/mrcomponents.png" alt="Microsoft R Family" /></li>
+</ul>
+<aside class="notes">
+ScaleR: suite of HPA functions for data manipulation and modeling, plus some custom HPC functionality ConnectR: high speed and direct connectors DistributedR: framework for cross-platform distributed computation DeployR: web service development kit through APIs, java, js, .net
+</aside>
+</section><section id="why-dplyrxdf" class="slide level2">
+<h1>Why dplyrXdf?</h1>
+<h3 id="simplify-your-analysis-pipeline">Simplify Your Analysis Pipeline</h3>
+<ul>
+<li class="fragment">The <code>RevoScaleR</code> package enables R users to manipulate data that is larger than memory</li>
+<li class="fragment">It introduces a new data type, called an <code>xdf</code> (short for eXternal Data Frame), which are highly efficient out-of-memory objects</li>
+<li class="fragment">However, many of the <code>RevoScaleR</code> functions have a dramatically different syntax from base R functions</li>
+<li class="fragment">The <code>dplyr</code> package is an exceptionally popular, due to its appealing syntax, and it’s extensibility</li>
+</ul>
+</section><section id="simpler-analysis-with-dplyrxdf" class="slide level2">
+<h1>Simpler Analysis with dplyrXdf</h1>
+<ul>
+<li class="fragment">The <code>dplyrXdf</code> that exposes most of the <code>dplyr</code> functionality to <code>xdf</code> objects</li>
+<li class="fragment">Many data analysis pipelines require creating many intermediate datasets, which are only needed for their role in deriving a final dataset, but have no/little use on their own</li>
+<li class="fragment">The <code>dplyrXdf</code> abstracts this task of file management, so that you can focus on the data itself, rather than the management of intermediate files</li>
+<li class="fragment">Unlike <code>dplyr</code>, or other base R packages, <code>dplyrXdf</code> allows you to work with data residing <em>outside</em> of memory, and therefore scales to datasets of arbitrary size</li>
+</ul>
+</section><section id="requirements" class="slide level2">
+<h1>Requirements</h1>
+<h3 id="what-youll-need">What You’ll Need</h3>
+<ul>
+<li class="fragment">I expect that you have already covered the <code>dplyr</code> training</li>
+<li class="fragment">Understand the <em>XDF</em> data type and how to import data to <em>XDF</em></li>
+<li class="fragment">If you’re working on a different computer than your trianer: have (<code>devtools</code>)[github.com/hadley/devtools] (and if on a Windows machine, <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>)</li>
+</ul>
+</section><section id="installing-dplyrxdf" class="slide level2">
+<h1>Installing dplyrXdf</h1>
+<ul>
+<li class="fragment">The <code>dplyrXdf</code> package is not yet on CRAN</li>
+<li class="fragment">You have to download it from <a href="https://github.com/RevolutionAnalytics/dplyrXdf/">github</a></li>
+<li class="fragment">if you’re on a windows machine, install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> as well</li>
+<li class="fragment">the <code>devtools</code> package provides a very handy function, <code>install_github</code>, for installing R packages saved in github repositories</li>
+</ul>
+</section><section id="create-xdf-from-taxi-data" class="slide level2">
+<h1>Create XDF from taxi data</h1>
+<h3 id="create-a-local-directory-to-save-xdf">Create a local directory to save XDF</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir.create</span>(<span class="st">&quot;data/&quot;</span>)</code></pre></div>
+<pre><code>## Warning in dir.create(&quot;data/&quot;): &#39;data&#39; already exists</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://alizaidi.blob.core.windows.net/training/yellow_tripdata_2015.xdf&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;data/yellow_tripdata_2015.xdf&quot;</span>)</code></pre></div>
+</section><section id="create-a-pointer-to-xdf" class="slide level2">
+<h1>Create a Pointer to XDF</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyrXdf)</code></pre></div>
+<pre><code>## Loading required package: dplyr</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## dplyrXdf defines the union_all generic to allow
+## interoperability with versions of dplyr &lt; 0.5.
+## Ignore the message about masking the same object from dplyr.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyrXdf&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     union_all</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_xdf &lt;-<span class="st"> </span><span class="kw">RxXdfData</span>(<span class="st">&quot;data/yellow_tripdata_2015.xdf&quot;</span>)
+taxi_xdf %&gt;%<span class="st"> </span>head</code></pre></div>
+<pre><code>##   VendorID passenger_count trip_distance RateCodeID store_and_fwd_flag
+## 1        2               1          1.59          1                  N
+## 2        1               1          3.30          1                  N
+## 3        1               1          1.80          1                  N
+## 4        1               1          0.50          1                  N
+## 5        1               1          3.00          1                  N
+## 6        1               1          9.00          1                  N
+##   payment_type fare_amount tip_amount tolls_amount pickup_hour pickup_dow
+## 1            1        12.0       3.25         0.00        6-10        Thu
+## 2            1        14.5       2.00         0.00        6-10        Sat
+## 3            2         9.5       0.00         0.00        6-10        Sat
+## 4            2         3.5       0.00         0.00        6-10        Sat
+## 5            2        15.0       0.00         0.00        6-10        Sat
+## 6            1        27.0       6.70         5.33        6-10        Sat
+##   dropoff_hour dropoff_dow        pickup_nhood    dropoff_nhood kSplits
+## 1         6-10         Thu    Garment District      Murray Hill       D
+## 2         6-10         Sat                Soho          Clinton       G
+## 3         6-10         Sat Morningside Heights Hamilton Heights       A
+## 4         6-10         Sat             Tribeca          Tribeca       B
+## 5         6-10         Sat             Midtown          Chelsea       F
+## 6         6-10         Sat                &lt;NA&gt;          Midtown       I</code></pre>
+</section></section>
+<section><section id="simplified-pipelines-for-data-summaries" class="titleslide slide level1"><h1>Simplified Pipelines for Data Summaries</h1></section><section id="data-transforms" class="slide level2">
+<h1>Data Transforms</h1>
+<h3 id="the-rxdatastep-way">The rxDataStep Way</h3>
+<ul>
+<li class="fragment">All the functionality exposed by the <code>dplyrXdf</code> package can also be completed by using the <code>rxDataStep</code> function in the <code>RevoScaleR</code> package included with your MRS installation</li>
+<li class="fragment">In fact, <code>dplyrXdf</code> consists almost entirely of wrapper functions that call on other RevoScaleR functions</li>
+<li class="fragment">Let’s compare the workflow for adding a new column to a dataset with <code>rxDataStep</code> vs <code>dplyrXdf</code></li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_xdf %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">getVarInfo =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## File name: /home/alizaidi/R-cadence/data/yellow_tripdata_2015.xdf 
+## Number of observations: 37696906 
+## Number of variables: 16 
+## Number of blocks: 21 
+## Compression type: zlib 
+## Variable information: 
+## Var 1: VendorID
+##        2 factor levels: 2 1
+## Var 2: passenger_count, Type: integer, Low/High: (1, 9)
+## Var 3: trip_distance, Type: numeric, Low/High: (0.0000, 49.9000)
+## Var 4: RateCodeID
+##        7 factor levels: 1 2 5 3 4 99 6
+## Var 5: store_and_fwd_flag
+##        2 factor levels: N Y
+## Var 6: payment_type
+##        5 factor levels: 1 2 3 4 5
+## Var 7: fare_amount, Type: numeric, Low/High: (0.0100, 503325.5300)
+## Var 8: tip_amount, Type: numeric, Low/High: (-0.0100, 3950588.8000)
+## Var 9: tolls_amount, Type: numeric, Low/High: (0.0000, 1000.6600)
+## Var 10: pickup_hour
+##        6 factor levels: 5-9 9-12 12-4 4-6 6-10 10-5
+## Var 11: pickup_dow
+##        7 factor levels: Sun Mon Tue Wed Thu Fri Sat
+## Var 12: dropoff_hour
+##        6 factor levels: 5-9 9-12 12-4 4-6 6-10 10-5
+## Var 13: dropoff_dow
+##        7 factor levels: Sun Mon Tue Wed Thu Fri Sat
+## Var 14: pickup_nhood
+##        263 factor levels: 19th Ward Abbott McKinley Albright Allen Annandale ... Woodhaven-Richmond Hill Woodlawn-Nordwood Woodrow Woodside Yorkville
+## Var 15: dropoff_nhood
+##        263 factor levels: 19th Ward Abbott McKinley Albright Allen Annandale ... Woodhaven-Richmond Hill Woodlawn-Nordwood Woodrow Woodside Yorkville
+## Var 16: kSplits
+##        10 factor levels: A B C D E F G H I J</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform &lt;-<span class="st"> </span><span class="kw">RxXdfData</span>(<span class="st">&quot;data/taxi_transform.xdf&quot;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(taxi_transform &lt;-<span class="st"> </span><span class="kw">rxDataStep</span>(<span class="dt">inData =</span> taxi_xdf,
+           <span class="dt">outFile =</span> taxi_transform,
+           <span class="dt">transforms =</span> <span class="kw">list</span>(<span class="dt">tip_pct =</span> tip_amount/fare_amount),
+           <span class="dt">overwrite =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   5.547   2.801  49.690</code></pre>
+</section><section id="data-transforms-1" class="slide level2">
+<h1>Data Transforms</h1>
+<h3 id="the-rxdatastep-way-1">The rxDataStep Way</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rxGetInfo</span>(<span class="kw">RxXdfData</span>(taxi_transform), <span class="dt">numRows =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>## File name: /home/alizaidi/R-cadence/data/taxi_transform.xdf 
+## Number of observations: 37696906 
+## Number of variables: 17 
+## Number of blocks: 21 
+## Compression type: zlib 
+## Data (2 rows starting with row 1):
+##   VendorID passenger_count trip_distance RateCodeID store_and_fwd_flag
+## 1        2               1          1.59          1                  N
+## 2        1               1          3.30          1                  N
+##   payment_type fare_amount tip_amount tolls_amount pickup_hour pickup_dow
+## 1            1        12.0       3.25            0        6-10        Thu
+## 2            1        14.5       2.00            0        6-10        Sat
+##   dropoff_hour dropoff_dow     pickup_nhood dropoff_nhood kSplits
+## 1         6-10         Thu Garment District   Murray Hill       D
+## 2         6-10         Sat             Soho       Clinton       G
+##     tip_pct
+## 1 0.2708333
+## 2 0.1379310</code></pre>
+</section><section id="data-transforms-2" class="slide level2">
+<h1>Data Transforms</h1>
+<h3 id="the-dplyrxdf-way">The dplyrXdf Way</h3>
+<ul>
+<li class="fragment">We could do the same operation with <code>dplyrXdf</code>, using the exact same syntax that we learned in the <code>dplyr</code> module and taking advantage of the <code>%&gt;%</code> operator</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(taxi_transform &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">tip_pct =</span> tip_amount/fare_amount))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   3.687   2.484  46.989</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">numRows =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>## File name: /tmp/RtmpKdrAyN/file4dac20396bba.xdf 
+## Number of observations: 37696906 
+## Number of variables: 17 
+## Number of blocks: 21 
+## Compression type: zlib 
+## Data (2 rows starting with row 1):
+##   VendorID passenger_count trip_distance RateCodeID store_and_fwd_flag
+## 1        2               1          1.59          1                  N
+## 2        1               1          3.30          1                  N
+##   payment_type fare_amount tip_amount tolls_amount pickup_hour pickup_dow
+## 1            1        12.0       3.25            0        6-10        Thu
+## 2            1        14.5       2.00            0        6-10        Sat
+##   dropoff_hour dropoff_dow     pickup_nhood dropoff_nhood kSplits
+## 1         6-10         Thu Garment District   Murray Hill       D
+## 2         6-10         Sat             Soho       Clinton       G
+##     tip_pct
+## 1 0.2708333
+## 2 0.1379310</code></pre>
+</section><section id="differences" class="slide level2">
+<h1>Differences</h1>
+<ul>
+<li class="fragment">The major difference between the <code>rxDataStep</code> operation and the <code>dplyrXdf</code> method, is that we do not specify an <code>outFile</code> argument anywhere in the <code>dplyrXdf</code> pipeline</li>
+<li class="fragment">In our case, we have assigned our <code>mutate</code> value to a new variable called <code>taxi_transform</code></li>
+<li class="fragment">This creates a temporary file to save the intermediate <code>xdf</code>, and only saves the most recent output of a pipeline, where a pipeline is defined as all operations starting from a raw xdf file.</li>
+<li class="fragment">To copy an <em>xdf</em> from the temporary directory to permanent storage, use the <code>persist</code> verb</li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform@file</code></pre></div>
+<pre><code>## [1] &quot;/tmp/RtmpKdrAyN/file4dac20396bba.xdf&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">persist</span>(taxi_transform, <span class="dt">outFile =</span> <span class="st">&quot;data/taxiTransform.xdf&quot;</span>) -&gt;<span class="st"> </span>taxi_transform</code></pre></div>
+</section><section id="using-dplyrxdf-for-aggregations" class="slide level2">
+<h1>Using dplyrXdf for Aggregations</h1>
+<h3 id="dplyrxdf-way">dplyrXdf Way</h3>
+<ul>
+<li class="fragment">The <code>dplyrXdf</code> package really shines when used for data aggregations and summarizations</li>
+<li class="fragment"><h2 id="whereas-rxsummary-rxcube-and-rxcrosstabs-can-compute-a-few-summary-statistics-and-do-aggregations-very-quickly-they-are-not-sufficiently-general-to-be-used-in-all-places">Whereas <code>rxSummary</code>, <code>rxCube</code>, and <code>rxCrossTabs</code> can compute a few summary statistics and do aggregations very quickly, they are not sufficiently general to be used in all places</h2></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_group &lt;-<span class="st"> </span>taxi_transform %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ave_tip_pct =</span> <span class="kw">mean</span>(tip_pct))
+taxi_group %&gt;%<span class="st"> </span>head</code></pre></div>
+<pre><code>##               pickup_nhood ave_tip_pct
+## 1                Annandale  0.13750000
+## 2            Ardon Heights  0.03814815
+## 3 Astoria-Long Island City  0.12307670
+## 4               Auburndale  0.14224544
+## 5             Battery Park  0.15798303
+## 6                Bay Ridge  0.40164238</code></pre>
+</section><section id="using-dplyrxdf-for-aggregations-1" class="slide level2">
+<h1>Using dplyrXdf for Aggregations</h1>
+<h3 id="rxcube-way">rxCube Way</h3>
+<ul>
+<li class="fragment">The above could have been done with <code>rxCube</code> as well, but would require additional considerations</li>
+<li class="fragment">We would have to make sure that the <code>pickup_nhood</code> column was a factor (can’t mutate in place because of different data types)</li>
+<li class="fragment"><code>rxCube</code> can only provide summations and averages, so we cannot get standard deviations for instance.</li>
+<li class="fragment">Creating your own factors is never a pleasant experience. You may feel like everything is going right until</li>
+</ul>
+</section><section id="faceplant" class="slide level2">
+<h1><img src="http://www.ohmagif.com/wp-content/uploads/2015/02/dude-front-flip-epic-face-plant.gif" alt="faceplant" /></h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rxFactors</span>(<span class="dt">inData =</span> taxi_transform, 
+          <span class="dt">outFile =</span> <span class="st">&quot;data/taxi_factor.xdf&quot;</span>, 
+          <span class="dt">factorInfo =</span> <span class="kw">c</span>(<span class="st">&quot;dropoff_nhood&quot;</span>), 
+          <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in factorInfoVarList(factorInfo[i], varInfo, sortLevelsDefault = sortLevels, : 
+##   No changes will be made to the factor variable &#39;dropoff_nhood&#39;
+##   because &#39;sortLevels = FALSE&#39; and there is no &#39;indexMap&#39;.</code></pre>
+<pre><code>## Warning in rxFactorsBase(inData = dataIO[[&quot;inData&quot;]], factorInfo =
+## factorInfo, : No changes made to the data set.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rxCube</span>(tip_pct ~<span class="st"> </span>dropoff_nhood, 
+            <span class="dt">means =</span> <span class="ot">TRUE</span>, 
+            <span class="dt">data =</span> <span class="st">&quot;data/taxi_factor.xdf&quot;</span>))</code></pre></div>
+<pre><code>##     dropoff_nhood   tip_pct Counts
+## 1       19th Ward       NaN      0
+## 2 Abbott McKinley       NaN      0
+## 3        Albright       NaN      0
+## 4           Allen       NaN      0
+## 5       Annandale 0.1495363    115
+## 6      Arbor Hill       NaN      0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.remove</span>(<span class="st">&quot;data/taxi_factor.xdf&quot;</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</section></section>
+<section><section id="creating-functional-pipelines-with-dplyrxdf" class="titleslide slide level1"><h1>Creating Functional Pipelines with dplyrXdf</h1></section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://alizaidi.blob.core.windows.net/training/manhattan.RData&quot;</span>))</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_transform %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(pickup_nhood %in%<span class="st"> </span>manhattan_hoods,
+           dropoff_nhood %in%<span class="st"> </span>manhattan_hoods, 
+           <span class="dt">.rxArgs =</span> <span class="kw">list</span>(<span class="dt">transformObjects =</span> <span class="kw">list</span>(<span class="dt">manhattan_hoods =</span> manhattan_hoods))) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(dropoff_nhood, pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">ave_tip =</span> <span class="kw">mean</span>(tip_pct), 
+              <span class="dt">ave_dist =</span> <span class="kw">mean</span>(trip_distance)) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(ave_dist &gt;<span class="st"> </span><span class="dv">3</span>, ave_tip &gt;<span class="st"> </span><span class="fl">0.05</span>) -&gt;<span class="st"> </span>sum_df</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_df %&gt;%<span class="st"> </span><span class="kw">rxGetInfo</span>(<span class="dt">getVarInfo =</span> <span class="ot">TRUE</span>, <span class="dt">numRows =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>## File name: /tmp/RtmpKdrAyN/file4dac6a04ad1e.xdf 
+## Number of observations: 408 
+## Number of variables: 4 
+## Number of blocks: 1 
+## Compression type: zlib 
+## Variable information: 
+## Var 1: dropoff_nhood
+##        263 factor levels: 19th Ward Abbott McKinley Albright Allen Annandale ... Woodhaven-Richmond Hill Woodlawn-Nordwood Woodrow Woodside Yorkville
+## Var 2: pickup_nhood
+##        263 factor levels: 19th Ward Abbott McKinley Albright Allen Annandale ... Woodhaven-Richmond Hill Woodlawn-Nordwood Woodrow Woodside Yorkville
+## Var 3: ave_tip, Type: numeric, Low/High: (0.0579, 0.1876)
+## Var 4: ave_dist, Type: numeric, Low/High: (3.0004, 13.9100)
+## Data (5 rows starting with row 1):
+##      dropoff_nhood pickup_nhood   ave_tip ave_dist
+## 1     Central Park Battery Park 0.1160478 6.028228
+## 2          Clinton Battery Park 0.1300344 3.878010
+## 3      East Harlem Battery Park 0.1102473 9.982296
+## 4     East Village Battery Park 0.1401632 3.952964
+## 5 Garment District Battery Park 0.1312443 3.874708</code></pre>
+</section><section class="slide level2">
+
+<p>Alternatively, we can encapsulate this script into a function, so that we can easily call it in a functional pipeline.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_hood_sum &lt;-<span class="st"> </span>function(<span class="dt">taxi_data =</span> taxi_df, ...) {
+  
+  taxi_data %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(pickup_nhood %in%<span class="st"> </span>manhattan_hoods,
+           dropoff_nhood %in%<span class="st"> </span>manhattan_hoods, ...) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(dropoff_nhood, pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">ave_tip =</span> <span class="kw">mean</span>(tip_pct), 
+              <span class="dt">ave_dist =</span> <span class="kw">mean</span>(trip_distance)) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(ave_dist &gt;<span class="st"> </span><span class="dv">3</span>, ave_tip &gt;<span class="st"> </span><span class="fl">0.05</span>) -&gt;<span class="st"> </span>sum_df
+  
+  <span class="kw">return</span>(sum_df)
+  
+}</code></pre></div>
+</section><section class="slide level2">
+
+<p>The resulting summary object isn’t very large (about 408 rows in this case), so it shouldn’t cause any memory overhead issues if we covert it now to a <code>data.frame</code>. We can plot our results using our favorite plotting library.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tile_plot_hood &lt;-<span class="st"> </span>function(<span class="dt">df =</span> <span class="kw">taxi_hood_sum</span>()) {
+  
+  <span class="kw">library</span>(ggplot2)
+  
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> pickup_nhood, <span class="dt">y =</span> dropoff_nhood)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> ave_tip), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme_bw</span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>),
+          <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;steelblue&quot;</span>) -&gt;<span class="st"> </span>gplot
+  
+  <span class="kw">return</span>(gplot)
+}</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tile_plot_hood</span>(<span class="kw">as.data.frame</span>(sum_df))</code></pre></div>
+<p><img src="2-dplyrXdf_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
+</section></section>
+<section><section id="split-and-combining-operations-with-doxdf" class="titleslide slide level1"><h1>Split and Combining Operations with doXdf</h1></section><section id="custom-functions-across-groups" class="slide level2">
+<h1>Custom functions across groups</h1>
+<p>The <code>do</code> verb is an exception to the rule that dplyrXdf verbs write their output as xdf files. This is because do executes arbitrary R code, and can return arbitrary R objects; while a data frame is capable of storing these objects, an xdf file is limited to character and numeric vectors only.</p>
+</section><section id="custom-functions-across-groups-1" class="slide level2">
+<h1>Custom functions across groups</h1>
+<p>The doXdf verb is similar to do, but where do splits its input into one data frame per group, doXdf splits it into one xdf file per group. This allows do-like functionality with grouped data, where each group can be arbitrarily large. The syntax for the two functions is essentially the same, although the code passed to doXdf must obviously know how to handle xdfs.</p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_models &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">rxLinMod</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .))</code></pre></div>
+</section><section id="memory-issues" class="slide level2">
+<h1>Memory Issues</h1>
+<p>All the caveats that go with working with <code>data.frames</code> apply here. While each grouped partition is it’s own <code>RxXdfData</code> object, the return value must be a <code>data.frame</code>, and hence, must fit in memory. Moreover, the function you apply against the splits will determine how they are operated. If you use an <code>rx</code> function, you’ll get the nice fault-tolerant, parallel execution strategies the <code>RevoScaleR</code> package provides, but for any vanilla/CRAN function will work with data.frames and can easily cause your session to crash.</p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+taxi_broom &lt;-<span class="st"> </span>taxi_xdf %&gt;%<span class="st"> </span><span class="kw">group_by</span>(pickup_dow) %&gt;%<span class="st"> </span><span class="kw">doXdf</span>(<span class="dt">model =</span> <span class="kw">glance</span>(<span class="kw">lm</span>(tip_amount ~<span class="st"> </span>fare_amount, <span class="dt">data =</span> .)))</code></pre></div>
+</section></section>
+    </div>
+  </div>
+
+  <script src="2-dplyrXdf_files/reveal.js-3.2.0/lib/js/head.min.js"></script>
+  <script src="2-dplyrXdf_files/reveal.js-3.2.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: []
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
+>>>>>>> 8746186e5ec2ed8857f8fed87d7475f8638fc212
