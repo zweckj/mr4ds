@@ -1481,5 +1481,4 @@ Chaining with the `%>%` operator can result in more readable code.
 ## Thanks for Attending!
 
 - Any questions?
->>>>>>> 8746186e5ec2ed8857f8fed87d7475f8638fc212
 - [alizaidi@microsoft.com](mailto:alizaidi@microsoft.com)
