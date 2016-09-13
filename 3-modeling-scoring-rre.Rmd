@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "Modeling and Scoring with Revolution R Enterprise"
 author: "Ali Zaidi"
@@ -816,5 +815,4 @@ rxGetInfo(multiclass_preds, numRows = 3)
 - Any questions?
 - Try different models!
 - Try modeling with `rxDForest`, `rxBTrees`: have significantly higher predictive accuracy, somewhat less interpretability
->>>>>>> 8746186e5ec2ed8857f8fed87d7475f8638fc212
 - [alizaidi@microsoft.com](mailto:alizaidi@microsoft.com)
