@@ -221,7 +221,7 @@ Check your CRAN mirror with `getOption("repos")`
 * `complex` 
 * `raw`
 
-# Data Manipulation with the dplyr Package
+# Data Manipulation with the `dplyr` Package
 
 ## Overview
 
@@ -235,7 +235,7 @@ At the end of this session, you will have learned:
 * How to apply your own custom functions to group manipulations `dplyr` with `mutate()`, `summarise()` and `do()`
 * Connect to remote databases to work with larger than memory datasets
 
-## Why use dplyr? 
+## Why use `dplyr`? 
 ### The Grammar of Data Manipulation
 
 * `dplyr` makes data manipulation easier by providing a few functions for the most common tasks and procedures
