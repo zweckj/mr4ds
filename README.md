@@ -1,7 +1,7 @@
 Microsoft R for Data Science Workshop
 ======================================
 
-Welcome to the Microsoft R for Data Science Course Repository. You can find up-the latest materials from the workshop here, as well as links for course materials from prior iterations of the course. While this course is intended for data scientists and analysts interested in the Microsoft R programming stack (i.e., Microsoft employees in the Algorithms and Data Science group), other programmers might find the material useful as well.
+Welcome to the Microsoft R for Data Science Course Repository. You can find the latest materials from the workshop here, and links for course materials from prior iterations of the course ca be found in the [version pane](https://github.com/akzaidi/R-cadence/releases). While this course is intended for data scientists and analysts interested in the Microsoft R programming stack (i.e., Microsoft employees in the Algorithms and Data Science group), other programmers might find the material useful as well.
 
 ## Current Links
 
@@ -30,7 +30,7 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find up-t
 
 ## DSVMs
 
-We will use DSVMs (Data Science Virtual Machines) from the Azure marketplace to run the course materials. For the Spark training, we will use Spark HDInsight Premium clusters, also from Azure. If you are interested in running these materials in a different environment, see the course wiki page for instructions. 
+We will use DSVMs (Data Science Virtual Machines) from the Azure marketplace to run the course materials. For the Spark training, we will use Spark HDInsight Premium clusters, also from Azure. If you are interested in running these materials in a different environment, see the course [wiki](https://github.com/akzaidi/R-cadence/wiki) for instructions. 
 
 + JupyterHub:
 	* https://londonrtrain.northeurope.cloudapp.azure.com:8000/hub/login
