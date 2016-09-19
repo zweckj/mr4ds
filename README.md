@@ -17,7 +17,9 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
 
 ## Course Syllabus
 
-+ Topics
+Please refer to the course syllabus for the full syllabus. The goal of this course is to cover the following modules, although some of the latter modules might be repalced for a hackathon/office hours.
+
++ Topics:
     * R Fundamentals
     * Data Manipulation with `dplyr`
     * Data Manipulation with `dplyrXdf`
@@ -25,8 +27,6 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
     * Parallel Computing with the `RevoScaleR` package
     * Deploying Models with the `AzureML` package
     * RxSpark and R APIs for Spark
-+ Datasets
-    * [NYC Taxi Data](http://www.andresmh.com/nyctaxitrips/)
 
 ## DSVMs
 
