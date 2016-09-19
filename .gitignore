@@ -10,3 +10,6 @@ model14.csv
 trip-report.md
 .vs/
 td-quid-test.R
+trip-reports/
+.Rhistory
+notes.md

@@ -1,7 +1,7 @@
 ---
 title: "Data Manipulation with dplyrXdf"
 author: "Microsoft Data Science Team"
-date: "August 30, 2016"
+date: "September 20th, 2016"
 output:
   revealjs::revealjs_presentation:
     theme: night
