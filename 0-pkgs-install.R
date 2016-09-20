@@ -4,7 +4,7 @@
 # update cran
 r <- getOption('repos')
 # set mirror to something a bit more recent
-r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-08-29/"
+r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-09-19/"
 options(repos = r)
 
 # If you have issues installing the rgeos package on linux:
@@ -17,8 +17,9 @@ pkgs_to_install <- c("devtools",
                      "lubridate",
                      # "rgeos", "sp", "maptools",
                      # "seriation",
-                     "ggplot2", "gridExtra",
-                     "ggrepel",
+                     "ggplot2",
+                     # "gridExtra",
+                     # "ggrepel",
                      "tidyr", "revealjs"
                      )
 pks_missing <- pkgs_to_install[!(pkgs_to_install %in% installed.packages()[, 1])]
