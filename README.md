@@ -3,6 +3,10 @@ Microsoft R for Data Science Workshop
 
 Welcome to the Microsoft R for Data Science Course Repository. You can find the latest materials from the workshop here, and links for course materials from prior iterations of the course ca be found in the [version pane](https://github.com/akzaidi/R-cadence/releases). While this course is intended for data scientists and analysts interested in the Microsoft R programming stack (i.e., Microsoft employees in the Algorithms and Data Science group), other programmers might find the material useful as well.
 
+## Class Links
+
++ [collab edit](http://collabedit.com/cufq4)
+
 ## Course Outline
 
 Please refer to the [course syllabus](https://github.com/akzaidi/R-cadence/wiki/Syllabus) for the full syllabus. The goal of this course is to cover the following modules, although some of the latter modules might be repalced for a hackathon/office hours.
