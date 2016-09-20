@@ -3,19 +3,7 @@ Microsoft R for Data Science Workshop
 
 Welcome to the Microsoft R for Data Science Course Repository. You can find the latest materials from the workshop here, and links for course materials from prior iterations of the course ca be found in the [version pane](https://github.com/akzaidi/R-cadence/releases). While this course is intended for data scientists and analysts interested in the Microsoft R programming stack (i.e., Microsoft employees in the Algorithms and Data Science group), other programmers might find the material useful as well.
 
-## Current Links
-
-+ [Collab Edit](http://collabedit.com/2xutq)
-+ [Survey Link](https://www.surveymonkey.co.uk/r/3WPD6M3)
-+ [Signup Sheet, please fill out before class!](https://microsoft.sharepoint.com/teams/ADS_education/_layouts/15/WopiFrame.aspx?sourcedoc=%7b6D621161-3AB7-41D5-9C23-1B2C6940EF0C%7d&file=ParticipantBackground-London08-29-16.xlsx&action=default)
-    * I'll use the signup sheet to email you, so add your email address if you want to be contacted with updates
-+ Download Data as a zip file, and extract to directory
-    * [data link](https://alizaidi.blob.core.windows.net/training/data.zip)
-+ Download data for dplyrXdf tutorial:
-    * download.file("https://alizaidi.blob.core.windows.net/training/yellow_tripdata_2015.xdf", destfile = "yellow_tripdata_2015.xdf")
-
-
-## Course Syllabus
+## Course Outline
 
 Please refer to the [course syllabus](https://github.com/akzaidi/R-cadence/wiki/Syllabus) for the full syllabus. The goal of this course is to cover the following modules, although some of the latter modules might be repalced for a hackathon/office hours.
 
@@ -38,6 +26,10 @@ We will use DSVMs (Data Science Virtual Machines) from the Azure marketplace to 
 + RStudio Server:
 	* http://redmondvm.westus.cloudapp.azure.com:8787/
 	* http://redmondvmtwo.westus.cloudapp.azure.com:8787/
+   
+### Credentials
+
++ You can find credentials for the VMs at [aka.ms/redmond-r](https://aka.ms/redmond-r)
 
 # Course Repository
 
