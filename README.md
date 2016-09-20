@@ -33,16 +33,11 @@ Please refer to the [course syllabus](https://github.com/akzaidi/R-cadence/wiki/
 We will use DSVMs (Data Science Virtual Machines) from the Azure marketplace to run the course materials. For the Spark training, we will use Spark HDInsight Premium clusters, also from Azure. If you are interested in running these materials in a different environment, see the course [wiki](https://github.com/akzaidi/R-cadence/wiki) for instructions. 
 
 + JupyterHub:
-	* https://londonrtrain.northeurope.cloudapp.azure.com:8000/hub/login
-	* https://londontwo.northeurope.cloudapp.azure.com:8000/hub/login
+	* https://redmondvmt.westus.cloudapp.azure.com:8000/
+	* https://redmondvmtwo.westus.cloudapp.azure.com:8000/
 + RStudio Server:
-	* http://londonrtrain.northeurope.cloudapp.azure.com:8787/
-	* http://londontwo.northeurope.cloudapp.azure.com:8787/
-
-# Logistics
-
-+ Need >=MRS 8.0.3
-+ an R IDE
+	* http://redmondvm.westus.cloudapp.azure.com:8787/
+	* http://redmondvmtwo.westus.cloudapp.azure.com:8787/
 
 # Course Repository
 
