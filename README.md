@@ -17,7 +17,7 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
 
 ## Course Syllabus
 
-Please refer to the course syllabus for the full syllabus. The goal of this course is to cover the following modules, although some of the latter modules might be repalced for a hackathon/office hours.
+Please refer to the [course syllabus](https://github.com/akzaidi/R-cadence/wiki/Syllabus) for the full syllabus. The goal of this course is to cover the following modules, although some of the latter modules might be repalced for a hackathon/office hours.
 
 + Topics:
     * R Fundamentals
