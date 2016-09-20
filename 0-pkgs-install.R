@@ -24,7 +24,7 @@ pkgs_to_install <- c("devtools",
                      )
 pks_missing <- pkgs_to_install[!(pkgs_to_install %in% installed.packages()[, 1])]
 
-install.packages(pks_missing)
+install.packages(c(pks_missing, 'knitr'))
 
 
 # install-dplyrXdf --------------------------------------------------------
