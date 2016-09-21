@@ -29,7 +29,7 @@ We will use DSVMs (Data Science Virtual Machines) from the Azure marketplace to 
 	* https://redmondvmtwo.westus.cloudapp.azure.com:8000/
 + RStudio Server:
 	* http://redmondvm.westus.cloudapp.azure.com:8787/
-	* http://redmondvmtwo.westus.cloudapp.azure.com:8787/
+	* http://redmondthree.westus.cloudapp.azure.com:8787/
    
 ### Credentials
 
