@@ -1,7 +1,7 @@
 ---
 title: "Modeling and Scoring with Revolution R Enterprise"
 author: "Ali Zaidi"
-date: "August 16, 2016"
+date: "September 21, 2016"
 output:
   ioslides_presentation:
     logo: images/clark-logo.png
@@ -100,8 +100,7 @@ rxGetInfo(mort_xdf, numRows = 3, getVarInfo = TRUE)
 
 
 create_partition <- function(xdf = mort_xdf,
-                             partition_size = 0.75,
-                             output_path = "/output/", ...) {
+                             partition_size = 0.75, ...) {
   rxDataStep(inData = xdf,
              outFile = xdf,
              transforms = list(
@@ -115,7 +114,7 @@ create_partition <- function(xdf = mort_xdf,
            overwrite = TRUE, ...)
   
   splitDS <- rxSplit(inData = xdf, 
-                     outFilesBase = "",
+                     outFilesBase = ,
                      outFileSuffixes = c("train", "validate"),
                      splitByFactor = "trainvalidate",
                      overwrite = TRUE)
@@ -165,6 +164,9 @@ make_form <- function(xdf = mort_xdf,
   return(form)
 }
 
+## Turns out, RevoScaleR already has a function for this
+formula(mort_xdf, depVar = "default_flag", varsToDrop = c("defaultflag", "trainvalidate"))
+
 
 ```
 
@@ -210,12 +212,12 @@ summary(default_model_logit)
 
 ```{r train_tree}
 default_model_tree <- estimate_model(mort_split$train, 
-                                     model = rxDTree, 
-                                     cp = -1, minBucket = 10,
+                                     model = rxDTree,
+                                     minBucket = 10,
                                      reportProgress = 0)
 summary(default_model_tree)
-# library(RevoTreeView)
-# plot(createTreeView(default_model_tree))
+library(RevoTreeView)
+plot(createTreeView(default_model_tree))
 
 ```
 
@@ -270,9 +272,33 @@ default_tree_scored <- rxPredict(default_model_tree,
 ## Visualize Multiple ROCs
 
 ```{r roc_multiple}
-# rxRocCurve("default_binary", 
-#            c("default_flag_Pred", "default_prob"), 
-#            data = default_tree_scored)
+rxRocCurve("default",
+           c("pred_logit_default", "pred_tree_default"),
+           data = default_tree_scored)
+
+```
+
+# Lab - Estimate Other Models Using the Functions Above
+
+## Ensemble Tree Algorithms
+
+Two of the most predictive algorithms in the `RevoScaleR` package are the `rxBTrees` and `rxDForest` algorithms, for gradient boosted decision trees and random forests, respectively.
+
+Use the above functions and estimate a model for each of those algorithms, and add them to the `default_tree_scored` dataset to visualize ROC and AUC metrics.
+
+```{r, eval = FALSE}
+
+## Starter code
+
+default_model_forest <- estimate_model(mort_split$train, 
+                                       model = ...)
+
+default_tree_scored <- rxPredict(default_model_forest,
+                                  mort_split$validate,
+                                 ...)
+
+## same for rxBTrees
+
 
 ```
 

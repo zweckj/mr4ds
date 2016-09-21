@@ -20,3 +20,7 @@ class-examples.R
 create-users.sh
 R-cadence.wiki/
 credentials/
+mortgage.trainvalidate.train.xdf
+mortgage.trainvalidate.validate.xdf
+mortgage.xdf
+scored.xdf
