@@ -136,7 +136,7 @@ R follows the [Unix philosophy](http://en.wikipedia.org/wiki/Unix_philosophy)
 ## R's Programming Paradigm
 ### Keys to R
 
-<span class="fragment">Everything that exist in R is an *object*</span>  
+<span class="fragment">Everything that exists in R is an *object*</span>  
 <span class="fragment">Everything that happens in R is a *function call*</span>  
 <span class="fragment">R was born to *interface*</span>
 
