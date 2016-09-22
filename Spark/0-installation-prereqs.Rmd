@@ -29,12 +29,13 @@ install.packages('ggplot2')
 
 # Install curl and gnutls for devtools
 
-We'll need a couple of packages that are not yet avaialable on CRAN, but are available as a development release on github.
+We'll need a couple of packages that are not yet avaialable on CRAN, but are available as a development release on github..
 
 ```{r devtools_install}
 
 system("sudo apt-get -y build-dep libcurl4-gnutls-dev")
 system("sudo apt-get -y install libcurl4-gnutls-dev")
+system("sudo ln -s /bin/tar /bin/gtar")
 install.packages('devtools')
 
 
@@ -46,7 +47,6 @@ install.packages('devtools')
 
 ```{r git_install}
 
-devtools::install_github("rstudio/sparkapi")
 devtools::install_github("rstudio/sparklyr")
 devtools::install_github('ropensci/plotly')
 
