@@ -14,10 +14,13 @@ sc <- spark_connect(master = "yarn-client")
 ```{r download_data}
 
 download.file("https://alizaidi.blob.core.windows.net/training/sample_taxi.csv", "sample_taxi.csv")
+# or the larger data!
+download.file("http://alizaidi.blob.core.windows.net/training/taxi_large.csv", "taxi_large.csv")
+
 wasb_taxi <- "/NYCTaxi/sample"
 rxHadoopListFiles("/")
 rxHadoopMakeDir(wasb_taxi)
-rxHadoopCopyFromLocal("sample_taxi.csv", wasb_taxi)
+rxHadoopCopyFromLocal("sample_taxi", wasb_taxi)
 rxHadoopCommand("fs -cat /NYCTaxi/sample/sample_taxi.csv | head")
 
 
@@ -32,7 +35,7 @@ To import data from csv files, we can use the `spark_read_csv` function, which i
 ```{r import_csv}
 
 taxi <- spark_read_csv(sc,
-                       path = "wasb://training@alizaidi.blob.core.windows.net/sample_taxi.csv",
+                       path = wasb_taxi,
                        "taxisample",
                        header = TRUE)
 
