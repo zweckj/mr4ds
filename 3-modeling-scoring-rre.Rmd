@@ -114,7 +114,7 @@ create_partition <- function(xdf = mort_xdf,
            overwrite = TRUE, ...)
   
   splitDS <- rxSplit(inData = xdf, 
-                     outFilesBase = ,
+                     #outFilesBase = ,
                      outFileSuffixes = c("train", "validate"),
                      splitByFactor = "trainvalidate",
                      overwrite = TRUE)
