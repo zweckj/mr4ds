@@ -7,6 +7,7 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
 
 ## Class Links
 
++ [course webpage](https://akzaidi.github.io/R-cadence/)
 + [gitter page](https://gitter.im/mr4ds/Lobby)
     * we are going to try and use gitter as a discussion forum for anything related to the course materials, and Microsoft R Server more generally
 + [Course wiki](https://github.com/akzaidi/R-cadence/wiki)
