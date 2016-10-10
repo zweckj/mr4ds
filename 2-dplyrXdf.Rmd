@@ -39,11 +39,11 @@ At the end of this session, you will have learned how to:
 
 ## The Microsoft R Family
 
-* ![Microsoft R Family](images/mr-family.png)
+![Microsoft R Family](images/mr-family.png)
 
 ## Microsoft R Component Stack
 
-* ![Microsoft R Family](images/mrcomponents.png)
+![Microsoft R Family](images/mrcomponents.png)
 
 <aside class="notes">
 ScaleR: suite of HPA functions for data manipulation and modeling, plus some custom HPC functionality
