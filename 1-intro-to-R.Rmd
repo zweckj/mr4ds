@@ -100,6 +100,7 @@ Demo of the IDEs come next.
 </aside>
 
 ## Development Environments 
+
 ### Where to Write R Code
 
 * The most popular integrated development environment for R is [RStudio](https://www.rstudio.com/)
@@ -112,6 +113,7 @@ Demo of the IDEs come next.
 
 
 ## What is R? 
+
 ### Why should I care?
 
 * R is the successor to the S Language, originated at Bell Labs AT&T
@@ -121,6 +123,7 @@ Demo of the IDEs come next.
 * ![Robert Gentleman and Ross Ihaka](http://revolution-computing.typepad.com/.a/6a010534b1db25970b016766fdae38970b-800wi)
 
 ## R's Philosophy 
+
 ### What R Thou?
 
 R follows the [Unix philosophy](http://en.wikipedia.org/wiki/Unix_philosophy)
