@@ -1,6 +1,8 @@
 Microsoft R for Data Science Workshop
 ======================================
 
+[![Join the chat at https://gitter.im/mr4ds/Lobby](https://badges.gitter.im/mr4ds/Lobby.svg)](https://gitter.im/mr4ds/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Welcome to the Microsoft R for Data Science Course Repository. You can find the latest materials from the workshop here, and links for course materials from prior iterations of the course ca be found in the [version pane](https://github.com/akzaidi/R-cadence/releases). While this course is intended for data scientists and analysts interested in the Microsoft R programming stack (i.e., Microsoft employees in the Algorithms and Data Science group), other programmers might find the material useful as well.
 
 ## Class Links
