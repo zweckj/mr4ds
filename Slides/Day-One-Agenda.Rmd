@@ -1,7 +1,7 @@
 ---
 title: "Day Two Agenda"
 author: "Ali Zaidi"
-date: "September 21, 2016"
+date: "October 10th, 2016"
 output:
   revealjs::revealjs_presentation:
     reveal_options:
@@ -16,7 +16,7 @@ output:
     transition: default
 ---
 
-# Welcome Back!
+# Welcome!
 
 ## Day Two Agenda
 

@@ -32,10 +32,12 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, fig.align = 'center')
 
 # Course Logistics
 
-<aside class="notes">
-Set the agenda, make sure people have water available, and snacks.
-Questions, anytime.
-</aside>
+For Jupyter, switch of rich display of output chunks:
+
+```{r}
+options(jupyter.rich_display = FALSE)
+```
+
 
 ## Day One
 
@@ -136,9 +138,12 @@ R follows the [Unix philosophy](http://en.wikipedia.org/wiki/Unix_philosophy)
 ## R's Programming Paradigm
 ### Keys to R
 
-<span class="fragment">Everything that exists in R is an *object*</span>  
-<span class="fragment">Everything that happens in R is a *function call*</span>  
+<span class="fragment">Everything that exist in R is an *object*</span>
+<br>
+<span class="fragment">Everything that happens in R is a *function call*</span>
+<br>
 <span class="fragment">R was born to *interface*</span>
+<br>
 
 <span class="fragment">_—John Chambers_</span>
 
@@ -313,7 +318,8 @@ At the end of this session, you will have learned:
 ```{r}
 library(dplyr)
 library(stringr)
-load(url("http://alizaidi.blob.core.windows.net/training/taxi_df.RData"))
+taxi_url <- "http://alizaidi.blob.core.windows.net/training/taxi_df.rds"
+taxi_df  <- readRDS(gzcon(url(taxi_url)))
 (taxi_df <- tbl_df(taxi_df))
 ```
 
@@ -506,7 +512,7 @@ taxi_df %>%
 ---
 
 ```{r}
-load(url("http://alizaidi.blob.core.windows.net/training/manhattan.RData"))
+manhattan_hoods <- readRDS(gzcon(url("http://alizaidi.blob.core.windows.net/training/manhattan.rds")))
 taxi_df %>% 
   filter(pickup_nhood %in% manhattan_hoods,
          dropoff_nhood %in% manhattan_hoods) %>% 
@@ -610,7 +616,9 @@ Your turn:
 ```{r}
 taxi_hood_sum <- function(taxi_data = taxi_df) {
   
-  load(url("http://alizaidi.blob.core.windows.net/training/manhattan.RData"))
+  mht_url <- "http://alizaidi.blob.core.windows.net/training/manhattan.rdschunk "
+  
+  manhattan_hoods <- readRDS(gzcon(url(mht_url)))
   taxi_data %>% 
     filter(pickup_nhood %in% manhattan_hoods,
            dropoff_nhood %in% manhattan_hoods) %>% 
