@@ -167,7 +167,7 @@ taxi_transform@file
 ```
 
 ```{r}
-persist(taxi_transform, outFile = "data/taxiTransform.xdf") -> taxi_transform
+persist(taxi_transform, outFile = "taxiTransform.xdf") -> taxi_transform
 ```
 
 ## Using dplyrXdf for Aggregations 
