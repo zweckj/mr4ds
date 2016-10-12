@@ -47,7 +47,7 @@ Please refer to the github repository for course materials [github.com/akzaidi/R
 
 ## Typical Lifecycle
 
-<img src="images/revo-split-life-cycle.png" width="893" height="279px" />
+![](images/revo-split-life-cycle.png)
 
 Typical Modeling Lifecycle:
 
@@ -101,21 +101,29 @@ rxGetInfo(mort_xdf, numRows = 3, getVarInfo = TRUE)
 
 create_partition <- function(xdf = mort_xdf,
                              partition_size = 0.75, ...) {
-  rxDataStep(inData = xdf,
-             outFile = xdf,
-             transforms = list(
-               trainvalidate = factor(
-                   ifelse(rbinom(.rxNumRows, 
+  # rxDataStep(inData = xdf,
+  #            outFile = xdf,
+  #            transforms = list(
+  #              trainvalidate = factor(
+  #                  ifelse(rbinom(.rxNumRows, 
+  #                                size = 1, prob = splitperc), 
+  #                         "train", "validate")
+  #              )
+  #          ),
+  #          transformObjects = list(splitperc = partition_size),
+  #          overwrite = TRUE, ...)
+  
+  splitDS <- rxSplit(inData = xdf, 
+                     #outFilesBase = ,
+                     outFileSuffixes = c("train", "validate"),
+                     transforms = list(
+                       trainvalidate = factor(
+                         ifelse(rbinom(.rxNumRows, 
                                  size = 1, prob = splitperc), 
                           "train", "validate")
                )
            ),
            transformObjects = list(splitperc = partition_size),
-           overwrite = TRUE, ...)
-  
-  splitDS <- rxSplit(inData = xdf, 
-                     #outFilesBase = ,
-                     outFileSuffixes = c("train", "validate"),
                      splitByFactor = "trainvalidate",
                      overwrite = TRUE)
   
