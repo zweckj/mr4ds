@@ -3,11 +3,6 @@ title: "Modeling and Scoring with RevoScaleR"
 author: "Ali Zaidi"
 date: "October 11, 2016"
 output:
-  ioslides_presentation:
-    logo: images/clark-logo.png
-    smaller: yes
-    widescreen: yes
-  beamer_presentation: default
   revealjs::revealjs_presentation:
     reveal_options:
       previewLinks: yes
@@ -18,6 +13,11 @@ output:
     self_contained: no
     theme: night
     transition: default
+  ioslides_presentation:
+    logo: images/clark-logo.png
+    smaller: yes
+    widescreen: yes
+  beamer_presentation: default
   slidy_presentation: default
   transition: rotate
 ---
@@ -330,7 +330,8 @@ default_tree_scored <- rxPredict(default_model_forest,
 
 ## same for rxBTrees
 
-
+default_model_gbm <- estimate_model(mort_split$train, 
+                                       model = rxBTrees)
 ```
 
 

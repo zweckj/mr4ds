@@ -34,3 +34,5 @@ gmailr-az.json
 gmailr.R
 teaching_notes.md
 Labs/Solutions
+5-AzureML_cache/
+*.csv
