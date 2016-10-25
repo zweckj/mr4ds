@@ -13,6 +13,8 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
 + [Course wiki](https://github.com/akzaidi/R-cadence/wiki)
     * the course wiki contains some instructions on how to install the class applications locally
     * it also contains the course syllabus
++ [Class Playlist](https://open.spotify.com/user/pakmanaz/playlist/02R6d9fLRwxI06EHcm2Mcs)
+    * As your instructor, I'll also be your workshop dj. Feel free to make requests.
 
 
 ## Course Outline
