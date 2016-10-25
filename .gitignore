@@ -33,7 +33,6 @@ gmailr-az.json
 .httr-oauth
 gmailr.R
 teaching_notes.md
-Labs/Solutions
 5-AzureML_cache/
 *.csv
 DSVM_Credentials_for_Microsoft_R_Workshop_sent-emails.rds

@@ -75,7 +75,9 @@ Before you go out and create your function, ask yourself the important questions
 
 est_lm_nhood <- function(nhood = "Upper East Side") {
   
-  ## body
+  filter_df <- dplyr::filter(taxi_df, pickup_nhood == nhood)
+  lm_model <- lm(tip_amount ~ trip_distance, data = filter_df)
+
   
   return(lm_model)
   
@@ -122,15 +124,15 @@ That means we can even create rather complex objects by simply chaining together
 
 ```{r}
 
-dep_var <- "tip_amoount"
-indep_vars <- c("trip_distance", "passenger_count", "pickup_nhood")
+dep_var <- "tip_amount"
+indep_vars <- c("trip_distance", "passenger_count", "dropoff_nhood")
 
 ## The paste function will paste together objects based on a separator
 ## It has to important arguments: collapse and sep
 ## Use collapse when you want to take a vector and paste all its elements into 1 element
 ## Use sep when you have multiple vectors (or scalars: vectors of length 1) and paste them together
 (rhs <- paste(indep_vars, collapse = " + "))
-
+(form <- paste(dep_var, rhs, sep = " ~ "))
 ```
 
 ### Exercise 2: Modeling Function from Strings
@@ -141,13 +143,14 @@ You have all the pieces: create your modeling function
 
 make_formula <- function(depvar, indepvars) {
   
-  # body
+  rhs <- paste(indepvars, collapse = " + ")
+  form <- paste(depvar, rhs, sep = " ~ ")
   
-  # return value
-  
-  
+
+  return(form)
 }
 
+make_formula(dep_var, indep_vars)
 ```
 
 ## Example 3 - Generalize Your Functions
@@ -160,13 +163,15 @@ With Example 2 completed, we can generalize example 1. In particular, we can now
 
 ```{r}
 
-est_lm_nhood <- function(nhood, model_form) {
+est_lm_nhood <- function(nhood, model_form = make_formula(depvar = dep_var, indepvars = indep_vars)) {
   
-  ## Body
+  filter_df <- dplyr::filter(taxi_df, pickup_nhood == nhood)
+  lm_model <- lm(model_form, data = filter_df)
   
-  ## return value
-  
+  return(lm_model)  
 }
+
+summary(est_lm_nhood("Midtown", make_formula(depvar = dep_var, indepvars = indep_vars)))
 
 ```
 
@@ -211,7 +216,7 @@ In this exercise, take the `lapply` function, and use `est_lm_hood` as the "func
 
 ```{r}
 
-lapply(..., est_lm_nhood)
+multi_models <- lapply(c("Midtown", "Financial District"), est_lm_nhood)
 ```
 
 
