@@ -1,5 +1,5 @@
 ---
-title: "Lab 1 - Writing R Functions"
+title: "Lab 2 - Writing R Functions"
 author: "Ali Zaidi"
 date: "9/20/2016"
 output: 
@@ -11,7 +11,8 @@ output:
 
 ```{r}
 library(dplyr)
-load(url("http://alizaidi.blob.core.windows.net/training/taxi_df.RData"))
+taxi_url <- "http://alizaidi.blob.core.windows.net/training/taxi_df.rds"
+taxi_df  <- readRDS(gzcon(url(taxi_url)))
 (taxi_df <- tbl_df(taxi_df))
 ```
 
@@ -55,6 +56,7 @@ But suppose we now want to calculate this model for a specific `pickup_nhood`. F
 
 tip_uws <- lm(tip_amount ~ trip_distance, 
               data = filter(taxi_df, pickup_nhood == "Upper West Side"))
+summary(tip_uws)
 
 ```
 
@@ -71,15 +73,24 @@ Before you go out and create your function, ask yourself the important questions
 ```{r}
 ## Starter code
 
-est_lm_nhood <- function(nhood) {
+est_lm_nhood <- function(nhood = "Upper East Side") {
   
-  ##
+  filter_df <- dplyr::filter(taxi_df, pickup_nhood == nhood)
+  lm_model <- lm(tip_amount ~ trip_distance, data = filter_df)
   
-  # return(something)
+  return(lm_model)
   
 }
 
 ```
+
+
+```{r}
+
+summary(est_lm_nhood("Midtown"))
+
+```
+
 
 # Digression 1 - Converting from Types
 
@@ -129,7 +140,7 @@ You have all the pieces: create your modeling function
 
 ```{r}
 
-make_model <- function(depvar, indepvars) {
+make_formula <- function(depvar, indepvars) {
   
   # body
   

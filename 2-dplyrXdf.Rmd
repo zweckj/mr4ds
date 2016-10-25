@@ -88,9 +88,7 @@ DeployR: web service development kit through APIs, java, js, .net
 ### Create a local directory to save XDF
 
 ```{r}
-# Replace string with a unique name
-your_name <- 'your_name'
-# Your custom File Path
+your_name <- "alizaidi"
 your_dir <- paste0('/datadrive/', your_name)
 # File Path to your Data
 your_data <- file.path(your_dir, 'tripdata_2015.xdf')
@@ -106,6 +104,12 @@ library(dplyrXdf)
 taxi_xdf <- RxXdfData(your_data)
 taxi_xdf %>% head
 ```
+
+
+```{r}
+class(taxi_xdf)
+```
+
 
 # Simplified Pipelines for Data Summaries
 
@@ -129,6 +133,15 @@ taxi_transform <- RxXdfData(your_data)
 ```
 
 ---
+
+```{r}
+rxDataStep(inData = taxi_xdf,
+           outFile = taxi_transform,
+           transforms = list(tip_pct = tip_amount/fare_amount),
+           overwrite = TRUE)
+```
+
+
 ```{r}
 system.time(taxi_transform <- rxDataStep(inData = taxi_xdf,
            outFile = taxi_transform,
@@ -195,13 +208,13 @@ taxi_group %>% head
 ---
 ```{r}
 rxFactors(inData = taxi_transform, 
-          outFile = "data/taxi_factor.xdf", 
+          outFile = "/datadrive/alizaidi/taxi_factor.xdf", 
           factorInfo = c("pickup_nhood"), 
           overwrite = TRUE)
 head(rxCube(tip_pct ~ pickup_nhood, 
             means = TRUE, 
-            data = "data/taxi_factor.xdf"))
-file.remove("data/taxi_factor.xdf")
+            data = "/datadrive/alizaidi/taxi_factor.xdf"))
+# file.remove("data/taxi_factor.xdf")
 ```
 
 # Creating Functional Pipelines with dplyrXdf
@@ -214,23 +227,37 @@ rxGetInfo(taxi_transform, numRows = 5)
 ---
 ```{r}
 load(url("http://alizaidi.blob.core.windows.net/training/manhattan.RData"))
+ls()
 ```
 ---
 ```{r}
 taxi_transform %>% 
-    filter(pickup_nhood %in% manhattan_hoods,
-           dropoff_nhood %in% manhattan_hoods, 
-           .rxArgs = list(transformObjects = list(manhattan_hoods = manhattan_hoods))) %>% 
+    filter(pickup_nhood %in% mht_hoods,
+           dropoff_nhood %in% mht_hoods, 
+           .rxArgs = list(transformObjects = list(mht_hoods = manhattan_hoods))) %>% 
     group_by(dropoff_nhood, pickup_nhood) %>% 
     summarize(ave_tip = mean(tip_pct), 
               ave_dist = mean(trip_distance)) %>% 
     filter(ave_dist > 3, ave_tip > 0.05) -> sum_df
 ```
 
+
+```{r}
+taxi_transform %>% 
+    filter(pickup_nhood %in% mht_hoods,
+           dropoff_nhood %in% mht_hoods, 
+           .rxArgs = list(transformObjects = list(mht_hoods = manhattan_hoods))) %>% 
+    group_by(dropoff_nhood, pickup_nhood) %>% 
+    summarize(ave_tip = median(tip_pct)) %>% 
+    filter(ave_dist > 3, ave_tip > 0.05) -> median_xdf
+```
+
+
 ---
 
 ```{r}
 sum_df %>% rxGetInfo(getVarInfo = TRUE, numRows = 5)
+class(sum_df)
 ```
 
 ---
@@ -277,7 +304,13 @@ tile_plot_hood <- function(df = taxi_hood_sum()) {
 ---
 
 ```{r}
-tile_plot_hood(as.data.frame(sum_df))
+# tile_plot_hood(as.data.frame(sum_df))
+taxi_transform <- taxi_xdf %>% mutate(tip_pct = tip_amount/fare_amount)
+library(plotly)
+sum_df <- taxi_hood_sum(taxi_transform, 
+                        .rxArgs = list(transformObjects = list(manhattan_hoods = manhattan_hoods))) %>% 
+  persist("/datadrive/alizaidi/summarized.xdf")
+ggplotly(tile_plot_hood(as.data.frame(sum_df)))
 ```
 
 # Split and Combining Operations with doXdf
@@ -295,6 +328,11 @@ The doXdf verb is similar to do, but where do splits its input into one data fra
 ```{r, eval = FALSE}
 taxi_models <- taxi_xdf %>% group_by(pickup_dow) %>% doXdf(model = rxLinMod(tip_amount ~ fare_amount, data = .))
 ```
+
+```{r}
+taxi_models
+```
+
 
 ## Memory Issues
 

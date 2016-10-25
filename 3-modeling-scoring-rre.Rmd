@@ -47,7 +47,7 @@ Please refer to the github repository for course materials [github.com/akzaidi/R
 
 ## Typical Lifecycle
 
-<img src="images/revo-split-life-cycle.png" width="893" height="279px" />
+![](images/revo-split-life-cycle.png)
 
 Typical Modeling Lifecycle:
 
@@ -279,7 +279,9 @@ rxGetInfo(default_logit_scored, numRows = 2)
 ## Visualize Model Results
 
 ```{r roc_curve}
-rxRoc(actualVarName = "default", predVarNames ="pred_logit_default", data = default_logit_scored)
+rxRoc(actualVarName = "default", 
+      predVarNames ="pred_logit_default", 
+      data = default_logit_scored)
 ```
 
 
@@ -322,17 +324,43 @@ Use the above functions and estimate a model for each of those algorithms, and a
 ## Starter code
 
 default_model_forest <- estimate_model(mort_split$train, 
-                                       model = ...)
+                                       model = rxDForest,
+                                       nTree = 100,
+                                       importance = TRUE,
+                                       reportProgress = 0)
 
-default_tree_scored <- rxPredict(default_model_forest,
+default_forest_scored <- rxPredict(default_model_forest,
                                   mort_split$validate,
-                                 ...)
+                                 "scored.xdf", 
+                                type = 'prob',
+                                predVarNames = c("pred_forest_current", "pred_forest_default", "pred_default"))
 
 ## same for rxBTrees
 
-default_model_gbm <- estimate_model(mort_split$train, 
-                                       model = rxBTrees)
+default_model_gbm <- estimate_model(mort_split$train,
+                                    model = rxBTrees,
+                                    importance = TRUE,
+                                    nTree = 100, reportProgress = 0)
+
+default_gbm_scored <- rxPredict(default_model_gbm,
+                                  mort_split$validate,
+                                 "scored.xdf",
+                                predVarNames = c("pred_gbm_default"))
+
+
+
 ```
+
+```{r, fig.width=11, fig.height = 8}
+
+rxRocCurve(actualVarName = "default",
+           predVarNames = c("pred_tree_default",
+                            "pred_logit_default",
+                            "pred_forest_default",
+                            "pred_gbm_default"),
+           data = 'scored.xdf')
+```
+
 
 
 # More Advanced Topics
