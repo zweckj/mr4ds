@@ -44,8 +44,8 @@ Next, click on the _Authorization Tokens_ tab at the top of the settings page an
 In order to connect your R client to your AzureML workshop, we will need to define a workspace object using the `workspace` function inside of your R session that points to an Azure service.
 
 ```{r keys, echo = FALSE}
-wsid <- "da61b6ab98d34f0383553e943401b806"
-pri_token <- "9f5da76de423445b967491eaaaae26ae"
+wsid <- "your_id"
+pri_token <- "your_private_token"
 
 library(AzureML)
 ws <- workspace(
