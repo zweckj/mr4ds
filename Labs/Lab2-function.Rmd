@@ -122,7 +122,7 @@ That means we can even create rather complex objects by simply chaining together
 
 ```{r}
 
-dep_var <- "tip_amoount"
+dep_var <- "tip_amount"
 indep_vars <- c("trip_distance", "passenger_count", "pickup_nhood")
 
 ## The paste function will paste together objects based on a separator
