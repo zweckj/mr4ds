@@ -6,7 +6,7 @@ Before we install the packages, let's make sure we are pulling from a recent mir
 
 r <- getOption('repos')
 # set mirror to something a bit more recent
-r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-09-20/"
+r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-10-24/"
 options(repos = r)
 
 
@@ -47,8 +47,12 @@ install.packages('devtools')
 
 ```{r git_install}
 
+devtools::isntall_github("rstudio/htmltools")
+devtools::install_github("rstudio/rmarkdown")
 devtools::install_github("rstudio/sparklyr")
+devtools::install_github("hadley/purrr")
 devtools::install_github('ropensci/plotly')
+devtools::install_github('yihui/knitr')
 
 ```
 

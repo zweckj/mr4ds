@@ -343,5 +343,12 @@ Moreover, the function you apply against the splits will determine how they are 
 
 ```{r, eval = FALSE}
 library(broom)
-taxi_broom <- taxi_xdf %>% group_by(pickup_dow) %>% doXdf(model = glance(lm(tip_amount ~ fare_amount, data = .)))
+taxi_broom <- taxi_xdf %>% group_by(pickup_dow) %>% doXdf(model = lm(tip_amount ~ fare_amount, data = .))
 ```
+Now we can apply the `broom::tidy` function at the row level to get summary statistics:
+
+```{r tidydoXdf}
+library(broom)
+tbl_df(taxi_broom) %>% rowwise() %>% tidy(model)
+```
+
