@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Ali Zaidi, alizaidi@microsoft.com" />
+  <meta name="dcterms.date" content="2016-11-28" />
+  <title>Introduction to R: Functional, Object-Based Computing for Data Analysis</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="1-intro-to-R_files/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="1-intro-to-R_files/reveal.js-3.3.0/css/theme/night.css" id="theme">
+
+<style type="text/css">
+.reveal section img {
+  background: rgba(255, 255, 255, 0.85);
+}
+</style>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="slides.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '1-intro-to-R_files/reveal.js-3.3.0/css/print/pdf.css' : '1-intro-to-R_files/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="1-intro-to-R_files/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Introduction to R: <em>Functional, Object-Based Computing for Data Analysis</em></h1>
+    <h2 class="author"><a href="mailto:alizaidi@microsoft.com">Ali Zaidi, alizaidi@microsoft.com</a></h2>
+    <h3 class="date">November 28, 2016</h3>
+</section>
+
+<section><section id="course-logistics" class="titleslide slide level1"><h1>Course Logistics</h1></section><section id="day-one" class="slide level2">
+<h1>Day One</h1>
+<h3 id="r-u-ready">R U Ready?</h3>
+<ul>
+<li class="fragment">Overview of The R Project for Statistical Computing</li>
+<li class="fragment">The Microsoft R Family</li>
+<li class="fragment">R’s capabilities and it’s limitations</li>
+<li class="fragment">What types of problems R might be useful for</li>
+<li class="fragment">How to manage data with the exceptionally popular open source package <code>dplyr</code></li>
+<li class="fragment">How to develop models and write functions in R</li>
+</ul>
+</section><section id="day-two" class="slide level2">
+<h1>Day Two</h1>
+<h3 id="scalable-data-analysis-with-microsoft-r">Scalable Data Analysis with Microsoft R</h3>
+<ul>
+<li class="fragment">Moving the compute to your data</li>
+<li class="fragment">WODA - Write Once, Deploy Anywhere</li>
+<li class="fragment">High Performance Analytics</li>
+<li class="fragment">High Performance Computing</li>
+<li class="fragment">Machine Learning with Microsoft R</li>
+</ul>
+</section><section id="day-three" class="slide level2">
+<h1>Day Three</h1>
+<h3 id="distributing-computing-on-spark-clusters-with-r">Distributing Computing on Spark Clusters with R</h3>
+<ul>
+<li class="fragment">Overview of the Apache Spark Project</li>
+<li class="fragment">Taming the Hadoop Zoo with HDInsight</li>
+<li class="fragment">Provisioing and Managing HDInsight Clusters</li>
+<li class="fragment">Spark DataFrames, <code>SparkR</code>, and the <code>sparklyr</code> package</li>
+<li class="fragment">Developing Machine Learning Pipelines with <code>Spark</code> and Microsoft R</li>
+</ul>
+</section><section id="prerequisites" class="slide level2">
+<h1>Prerequisites</h1>
+<h3 id="computing-environments">Computing Environments</h3>
+<ul>
+<li class="fragment">R Server 8.0.5 or above</li>
+<li class="fragment">Azure Credits</li>
+<li class="fragment">Can use the <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-linux-dsvm-intro/">Linux DSVM</a></li>
+<li class="fragment">Or the <a href="https://azure.microsoft.com/en-us/documentation/articles/machine-learning-data-science-provision-vm/">Windows DSVM</a></li>
+<li class="fragment">For IDE: use <a href="https://www.visualstudio.com/vs/rtvs/">RTVS</a>, <a href="https://www.rstudio.com/products/rstudio/download3/">RStudio Server</a>, <a href="https://jupyterhub.readthedocs.io/en/latest/">JupyterHub</a>, <a href="http://jupyterlab-tutorial.readthedocs.io/en/latest/">JupyterLab</a>…
+<ul>
+<li class="fragment">Whatever you’re comfortable with!</li>
+</ul></li>
+</ul>
+</section><section id="development-environments" class="slide level2">
+<h1>Development Environments</h1>
+<h3 id="where-to-write-r-code">Where to Write R Code</h3>
+<ul>
+<li class="fragment">The most popular integrated development environment for R is <a href="https://www.rstudio.com/">RStudio</a></li>
+<li class="fragment">The RStudio IDE is entirely html/javascript based, so completely cross-platform</li>
+<li class="fragment">RStudio Server provides a full IDE in your browser: perfect for cloud instances</li>
+<li class="fragment">For Windows machines, we have recently announced the general availability of <a href="https://www.visualstudio.com/en-us/features/rtvs-vs.aspx">R Tools for Visual Studio, RTVS</a></li>
+<li class="fragment">RTVS supports connectivity to Azure and SQL Server</li>
+</ul>
+</section><section id="what-is-r" class="slide level2">
+<h1>What is R?</h1>
+<h3 id="why-should-i-care">Why should I care?</h3>
+<ul>
+<li class="fragment">R is the successor to the S Language, originated at Bell Labs AT&amp;T</li>
+<li class="fragment">It is based on the Scheme interpreter</li>
+<li class="fragment">Originally designed by two University of Auckland Professors for their introductory statistics course</li>
+</ul>
+<p><img src="http://revolution-computing.typepad.com/.a/6a010534b1db25970b016766fdae38970b-800wi" alt="Robert Gentleman and Ross Ihaka" /></p>
+</section><section id="rs-philosophy" class="slide level2">
+<h1>R’s Philosophy</h1>
+<h3 id="what-r-thou">What R Thou?</h3>
+<p>R follows the <a href="http://en.wikipedia.org/wiki/Unix_philosophy">Unix philosophy</a></p>
+<ul>
+<li class="fragment">Write programs that do one thing and do it well (modularity)</li>
+<li class="fragment">Write programs that work together (cohesiveness)</li>
+<li class="fragment">R is extensible with more than 10,000 packages available at CRAN (<a href="http://crantastic.org/packages" class="uri">http://crantastic.org/packages</a>)</li>
+</ul>
+</section><section id="the-art-of-being-lazy" class="slide level2">
+<h1>The aRt of Being Lazy</h1>
+<h3 id="lazy-evaluation-in-r">Lazy Evaluation in R</h3>
+<p><img src="http://i.imgur.com/5GbW690.gif" /></p>
+<ul>
+<li class="fragment">R, like it’s inspiration, Scheme, is a <em>functional</em> programming language</li>
+<li class="fragment">R evaluates lazily, delaying evaluation until necessary, which can make it very flexible</li>
+<li class="fragment">R is a highly interpreted dynamically typed language, allowing you to mutate variables and analyze datasets quickly, but is significantly slower than low-level, statically typed languages like C or Java</li>
+<li class="fragment">R has a high memory footprint, and can easily lead to crashes if you aren’t careful</li>
+</ul>
+</section><section id="rs-programming-paradigm" class="slide level2">
+<h1>R’s Programming Paradigm</h1>
+<h3 id="keys-to-r">Keys to R</h3>
+<p><span class="fragment">Everything that exist in R is an <em>object</em></span> <br> <span class="fragment">Everything that happens in R is a <em>function call</em></span> <br> <span class="fragment">R was born to <em>interface</em></span> <br></p>
+<p><span class="fragment"><em>—John Chambers</em></span></p>
+</section><section id="strengths-of-r" class="slide level2">
+<h1>Strengths of R</h1>
+<h3 id="where-r-succeeds">Where R Succeeds</h3>
+<ul>
+<li class="fragment">Expressive</li>
+<li class="fragment">Open source</li>
+<li class="fragment">Extendable – nearly 10,000 packages with functions to use, and that list continues to grow</li>
+<li class="fragment">Focused on statistics and machine learning – cutting-edge algorithms and powerful data manipulation packages</li>
+<li class="fragment">Advanced data structures and graphical capabilities</li>
+<li class="fragment">Large user community, both within academia and industry</li>
+<li class="fragment">It is designed by statisticians</li>
+</ul>
+</section><section id="weaknesses-of-r" class="slide level2">
+<h1>Weaknesses of R</h1>
+<h3 id="where-r-falls-short">Where R Falls Short</h3>
+<ul>
+<li class="fragment">It is designed by statisticians</li>
+<li class="fragment">Inefficient at element-by-element computations</li>
+<li class="fragment">May make large demands on system resources, namely memory</li>
+<li class="fragment">Data capacity limited by memory</li>
+<li class="fragment">Single-threaded</li>
+</ul>
+</section><section id="some-essential-open-source-packages" class="slide level2">
+<h1>Some Essential Open Source Packages</h1>
+<ul>
+<li class="fragment">There are over 10,000 R packages to choose from, what do I start with?</li>
+<li class="fragment">Data Management: <code>dplyr</code>, <code>tidyr</code>, <code>data.table</code></li>
+<li class="fragment">Visualization: <code>ggplot2</code>, <code>ggvis</code>, <code>htmlwidgets</code>, <code>shiny</code></li>
+<li class="fragment">Data Importing: <code>haven</code>, <code>RODBC</code>, <code>readr</code>, <code>foreign</code></li>
+<li class="fragment">Other favorites: <code>magrittr</code>, <code>rmarkdown</code>, <code>caret</code></li>
+</ul>
+</section></section>
+<section><section id="r-foundations" class="titleslide slide level1"><h1>R Foundations</h1></section><section id="command-line-prompts" class="slide level2">
+<h1>Command line prompts</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;-</code></td>
+<td>assignment operator</td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>ready for a new command</td>
+</tr>
+<tr class="odd">
+<td><code>+</code></td>
+<td>awaiting the completion of an existing command</td>
+</tr>
+<tr class="even">
+<td><code>?</code></td>
+<td>get help for following function</td>
+</tr>
+</tbody>
+</table>
+<p>Can change options either permanently at startup (see <code>?Startup</code>) or manually at each session with the <code>options</code> function, <code>options(repos = &quot; &quot;)</code> for example.</p>
+<p>Check your CRAN mirror with <code>getOption(&quot;repos&quot;)</code>.</p>
+</section><section id="im-lost" class="slide level2">
+<h1>I’m Lost!</h1>
+<h3 id="getting-help-for-r">Getting Help for R</h3>
+<ul>
+<li class="fragment"><a href="http://stackoverflow.com/questions/tagged/r">Stack Overflow</a></li>
+<li class="fragment"><a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">R Reference Card</a></li>
+<li class="fragment"><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio Cheat Sheets</a></li>
+<li class="fragment"><a href="https://stat.ethz.ch/mailman/listinfo/r-help">R help mailing list and archives</a></li>
+<li class="fragment"><a href="http://blog.revolutionanalytics.com/">Revolutions Blog</a></li>
+<li class="fragment"><a href="http://www.r-bloggers.com/">R-Bloggers</a></li>
+<li class="fragment"><a href="rseek.org">RSeek</a></li>
+<li class="fragment"><a href="https://www.rdocumentation.org/">RDocumentation</a></li>
+</ul>
+</section><section id="quick-tour-of-things-you-need-to-know" class="slide level2">
+<h1>Quick Tour of Things You Need to Know</h1>
+<h3 id="data-structures">Data Structures</h3>
+<blockquote>
+<p>“Bad programmers worry about the code. Good programmers worry about data structures and their relationships.” - Linus Torvalds</p>
+</blockquote>
+<ul>
+<li class="fragment">R’s data structures can be described by their dimensionality, and their type.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Homogeneous</th>
+<th>Heterogeneous</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1d</td>
+<td>Atomic vector</td>
+<td>List</td>
+</tr>
+<tr class="even">
+<td>2d</td>
+<td>Matrix</td>
+<td>Data frame</td>
+</tr>
+<tr class="odd">
+<td>nd</td>
+<td>Array</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section><section id="quick-tour-of-things-you-need-to-know-1" class="slide level2">
+<h1>Quick Tour of Things You Need to Know</h1>
+<h3 id="data-types">Data Types</h3>
+<ul>
+<li class="fragment">Atomic vectors come in one of four types</li>
+<li class="fragment"><code>logical</code> (boolean). Values: <code>TRUE</code> | <code>FALSE</code></li>
+<li class="fragment"><code>integer</code></li>
+<li class="fragment"><code>double</code> (often called numeric)</li>
+<li class="fragment"><code>character</code></li>
+<li class="fragment">Rare types:</li>
+<li class="fragment"><code>complex</code></li>
+<li class="fragment"><code>raw</code></li>
+</ul>
+</section><section id="manipulating-data-structures" class="slide level2">
+<h1>Manipulating Data Structures</h1>
+<h3 id="subsetting-operators">Subsetting Operators</h3>
+<ul>
+<li class="fragment">To create a vector, use <code>c</code>: <code>c(1, 4, 1, 3)</code></li>
+<li class="fragment">To create a list, use <code>list</code>: <code>list(1, 'hi', data.frame(1:10, letters[1:10]))</code></li>
+<li class="fragment">To subset a vector or list, use the <code>[ ]</code></li>
+<li class="fragment">inside the brackets:
+<ul>
+<li class="fragment">positive integer vectors for indices you want</li>
+<li class="fragment">negative integer vectors for indices you want to drop</li>
+<li class="fragment">logical vectors for indices you want to keep/drop (TRUE/FALSE)</li>
+<li class="fragment">character vectors for named vectors corresponding to which named elements you want to keep</li>
+<li class="fragment">subsetting a list with a single square bracket always returns a list</li>
+</ul></li>
+<li class="fragment">To subset a list and get back just that element, use <code>[[ ]]</code></li>
+</ul>
+<h3 id="object-representation">Object Representation</h3>
+<ul>
+<li class="fragment">To find the type of an object, use <code>class</code> (<em>higher level representation</em>)</li>
+<li class="fragment">To find how the object is stored in memory, use <code>typeof</code> (<em>lower level representation</em>)</li>
+<li class="fragment">Good time to do Lab 0!</li>
+</ul>
+</section></section>
+<section><section id="data-manipulation-with-the-dplyr-package" class="titleslide slide level1"><h1>Data Manipulation with the dplyr Package</h1></section><section id="overview" class="slide level2">
+<h1>Overview</h1>
+<p>Rather than describing the nitty gritty details of writing R code, I’d like you to get started at immediately writing R code.</p>
+<p>As most of you are data scientists/data enthusiasts, I will showcase one of the most useful data manipulation packages in R, <code>dplyr</code>. At the end of this session, you will have learned:</p>
+<ul>
+<li class="fragment">How to manipulate data quickly with <code>dplyr</code> using a very intuitive <em>“grammar”</em></li>
+<li class="fragment">How to use <code>dplyr</code> to perform common exploratory analysis data manipulation procedures</li>
+<li class="fragment">How to apply your own custom functions to group manipulations <code>dplyr</code> with <code>mutate()</code>, <code>summarise()</code> and <code>do()</code></li>
+<li class="fragment">Connect to remote databases to work with larger than memory datasets</li>
+</ul>
+</section><section id="why-use-dplyr" class="slide level2">
+<h1>Why use dplyr?</h1>
+<h3 id="the-grammar-of-data-manipulation">The Grammar of Data Manipulation</h3>
+<ul>
+<li class="fragment"><code>dplyr</code> is currently the <a href="https://www.rdocumentation.org/packages/dplyr/versions/0.5.0?">most downloaded package</a> from CRAN</li>
+<li class="fragment"><code>dplyr</code> makes data manipulation easier by providing a few functions for the most common tasks and procedures</li>
+<li class="fragment"><code>dplyr</code> achieves remarkable speed-up gains by using a C++ backend</li>
+<li class="fragment"><code>dplyr</code> has multiple backends for working with data stored in various sources: SQLite, MySQL, bigquery, SQL Server, and many more</li>
+<li class="fragment"><code>dplyr</code> was inspired to give data manipulation a simple, cohesive grammar (similar philosophy to <code>ggplot</code> - grammar of graphics)</li>
+<li class="fragment"><code>dplyr</code> has inspired many new packages, which now adopt it’s easy to understand syntax.</li>
+<li class="fragment">The recent packages <code>dplyrXdf</code> and <code>SparkR/sparklyr</code> brings much of the same functionality of <code>dplyr</code> to <code>XDF</code>s data and Spark <code>DataFrames</code></li>
+</ul>
+</section><section id="tidy-data-and-happier-coding" class="slide level2">
+<h1>Tidy Data and Happier Coding</h1>
+<h3 id="premature-optimization">Premature Optimization</h3>
+<p><img src="https://imgs.xkcd.com/comics/the_general_problem.png" /></p>
+<ul>
+<li class="fragment">For a dats scientist, the most important parameter to optimize in a data science development cycle is YOUR time</li>
+<li class="fragment">It is therefore important to be able to write efficient code, quickly</li>
+<li class="fragment">Goals: writing fast code that is: portable, platform invariant, easy to understand, and easy to debug
+<ul>
+<li class="fragment"><strong>Be serious about CReUse</strong>!</li>
+</ul></li>
+</ul>
+</section><section id="manipulation-verbs" class="slide level2">
+<h1>Manipulation verbs</h1>
+<dl>
+<dt class="fragment"><code>filter</code></dt>
+<dd class="fragment"><p>select rows based on matching criteria</p>
+</dd>
+<dt class="fragment"><code>slice</code></dt>
+<dd class="fragment"><p>select rows by number</p>
+</dd>
+<dt class="fragment"><code>select</code></dt>
+<dd class="fragment"><p>select columns by column names</p>
+</dd>
+<dt class="fragment"><code>arrange</code></dt>
+<dd class="fragment"><p>reorder rows by column values</p>
+</dd>
+<dt class="fragment"><code>mutate</code></dt>
+<dd class="fragment"><p>add new variables based on transformations of existing variables</p>
+</dd>
+<dt class="fragment"><code>transmute</code></dt>
+<dd class="fragment"><p>transform and drop other variables</p>
+</dd>
+</dl>
+</section><section id="aggregation-verbs" class="slide level2">
+<h1>Aggregation verbs</h1>
+<dl>
+<dt class="fragment"><code>group_by</code></dt>
+<dd class="fragment"><p>identify grouping variables for calculating groupwise summary statistics</p>
+</dd>
+<dt class="fragment"><code>count</code></dt>
+<dd class="fragment"><p>count the number of records per group</p>
+</dd>
+<dt class="fragment"><code>summarise</code> | <code>summarize</code></dt>
+<dd class="fragment"><p>calculate one or more summary functions per group, returning one row of results per group (or one for the entire dataset)</p>
+</dd>
+</dl>
+</section><section id="nyc-taxi-data" class="slide level2">
+<h1>NYC Taxi Data</h1>
+<h3 id="data-for-class">Data for Class</h3>
+<ul>
+<li class="fragment">The data we will be examining in this module is dervided from the <a href="http://www.nyc.gov/html/tlc/html/home/home.shtml">NYC Taxi and Limousine Commission</a></li>
+<li class="fragment">Data contains taxi trips in NYC, and includes spatial features (pickup and dropoff neighborhoods), temporal features, and monetary features (fare and tip amounts)</li>
+<li class="fragment">The dataset for this module is saved as an <em>rds</em> file in a public facing Azure storage blob</li>
+<li class="fragment">An <em>rds</em> file is a compressed, serialized R object</li>
+<li class="fragment">Save an object to <em>rds</em> by using the <code>saveRDS</code> function; read an <em>rds</em> object with the <code>readRDS</code> object</li>
+</ul>
+</section><section id="viewing-data" class="slide level2">
+<h1>Viewing Data</h1>
+<h3 id="tibble">tibble</h3>
+<ul>
+<li class="fragment"><code>dplyr</code> includes a wrapper called <code>tbl_df</code> that adds an additional class attribute onto <code>data.frames</code> that provides some better data manipulation aesthetics (there’s now a dedicated package <a href="www.github.com/hadley/tibble"><code>tibble</code></a> for this wrapper and it’s class)</li>
+<li class="fragment">Most noticeable differential between <code>tbl_df</code> and <code>data.frame</code>s is the console output: <code>tbl_df</code>s will only print what the current R console window can display</li>
+<li class="fragment">Can change the default setting for number of displayed columns by changing the options parameter: <code>options(dplyr.width = Inf)</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(stringr)
+taxi_url &lt;-<span class="st"> &quot;http://alizaidi.blob.core.windows.net/training/taxi_df.rds&quot;</span>
+taxi_df  &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">gzcon</span>(<span class="kw">url</span>(taxi_url)))
+(taxi_df &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(taxi_df))</code></pre></div>
+<pre><code>## # A tibble: 3,770,319 × 16
+##    VendorID passenger_count trip_distance RateCodeID store_and_fwd_flag
+##       &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;      &lt;chr&gt;              &lt;chr&gt;
+## 1         1               1          1.80          1                  N
+## 2         1               2          0.90          1                  N
+## 3         1               1          0.90          1                  N
+## 4         1               1          0.30          1                  N
+## 5         2               1          0.96          1                  N
+## 6         2               1          2.01          1                  N
+## 7         2               3          3.14          1                  N
+## 8         1               1          0.50          1                  N
+## 9         2               1          0.67          1                  N
+## 10        2               1         15.20          2                  N
+## # ... with 3,770,309 more rows, and 11 more variables: payment_type &lt;chr&gt;,
+## #   fare_amount &lt;dbl&gt;, tip_amount &lt;dbl&gt;, tolls_amount &lt;dbl&gt;,
+## #   pickup_hour &lt;chr&gt;, pickup_dow &lt;chr&gt;, dropoff_hour &lt;chr&gt;,
+## #   dropoff_dow &lt;chr&gt;, pickup_nhood &lt;chr&gt;, dropoff_nhood &lt;chr&gt;,
+## #   kSplits &lt;chr&gt;</code></pre>
+</section></section>
+<section><section id="filtering-and-reordering-data" class="titleslide slide level1"><h1>Filtering and Reordering Data</h1></section><section id="subsetting-data" class="slide level2">
+<h1>Subsetting Data</h1>
+<ul>
+<li class="fragment"><code>dplyr</code> makes subsetting by rows very easy</li>
+<li class="fragment">The <code>filter</code> verb takes conditions for filtering rows based on conditions</li>
+<li class="fragment"><strong>every</strong> <code>dplyr</code> function uses a data.frame/tbl as it’s first argument</li>
+<li class="fragment">Additional conditions are passed as new arguments (no need to make an insanely complicated expression, split em up!)</li>
+</ul>
+</section><section id="filter" class="slide level2">
+<h1>Filter</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(taxi_df,
+       dropoff_dow %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>, <span class="st">&quot;Sun&quot;</span>),
+       tip_amount &gt;<span class="st"> </span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## # A tibble: 859,165 × 16
+##    VendorID passenger_count trip_distance RateCodeID store_and_fwd_flag
+##       &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;      &lt;chr&gt;              &lt;chr&gt;
+## 1         1               2          0.90          1                  N
+## 2         1               1          0.90          1                  N
+## 3         2               1          2.01          1                  N
+## 4         2               3          3.14          1                  N
+## 5         2               1          6.08          1                  N
+## 6         2               1          1.96          1                  N
+## 7         1               1          0.40          1                  N
+## 8         1               2          1.70          1                  N
+## 9         1               2          0.60          1                  N
+## 10        1               2          9.30          1                  N
+## # ... with 859,155 more rows, and 11 more variables: payment_type &lt;chr&gt;,
+## #   fare_amount &lt;dbl&gt;, tip_amount &lt;dbl&gt;, tolls_amount &lt;dbl&gt;,
+## #   pickup_hour &lt;chr&gt;, pickup_dow &lt;chr&gt;, dropoff_hour &lt;chr&gt;,
+## #   dropoff_dow &lt;chr&gt;, pickup_nhood &lt;chr&gt;, dropoff_nhood &lt;chr&gt;,
+## #   kSplits &lt;chr&gt;</code></pre>
+</section><section id="exercise" class="slide level2">
+<h1>Exercise</h1>
+<p>Your turn:</p>
+<ul>
+<li class="fragment">How many observations started in Harlem?</li>
+<li class="fragment">pick both sides of Harlem, including east harlem</li>
+<li class="fragment">How many observations that started in Harlem ended in the Financial District?</li>
+</ul>
+</section><section id="solution" class="slide level2">
+<h1>Solution</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">table</span>(taxi_df$pickup_nhood)</code></pre></div>
+<pre><code>## 
+##            Ardon Heights Astoria-Long Island City               Auburndale 
+##                        1                    18553                       19 
+##             Battery Park                Bay Ridge               Baychester 
+##                    31427                      172                        8 
+##             Bedford Park       Bedford-Stuyvesant              Bensonhurst 
+##                       92                     3179                       95 
+##              Boerum Hill             Borough Park              Brownsville 
+##                     4400                      521                       85 
+##                 Bushwick                 Canarsie            Carnegie Hill 
+##                     1645                       85                    43052 
+##          Carroll Gardens             Central Park                  Chelsea 
+##                     5701                    47925                   257981 
+##                Chinatown              City Island                Clearview 
+##                    12102                        2                        8 
+##                  Clifton                  Clinton              Cobble Hill 
+##                        2                   117715                     2099 
+##                   Corona             Country Club  Douglastown-Little Neck 
+##                      119                       31                       68 
+##                 Downtown            Dyker Heights            East Brooklyn 
+##                     7148                       32                      120 
+##              East Harlem             East Village              Eastchester 
+##                    12161                   138604                        8 
+##       Financial District                 Flatbush                 Flushing 
+##                    76964                        2                      354 
+##                  Fordham             Forest Hills               Fort Green 
+##                       83                     1227                     9997 
+##         Garment District                 Glendale                 Gramercy 
+##                   213613                       61                   304905 
+## Gravesend-Sheepshead Bay        Greenwich Village                Greenwood 
+##                      163                   177965                      516 
+##         Hamilton Heights                   Harlem              High Bridge 
+##                     7543                    19864                      413 
+##             Howland Hook              Hunts Point                   Inwood 
+##                        2                       46                      312 
+##          Jackson Heights                  Jamaica             Kings Bridge 
+##                     3606                      784                      110 
+##                Laurelton             Little Italy          Lower East Side 
+##                       26                    33178                    89114 
+##       Mapleton-Flatlands          Mariners Harbor                  Maspeth 
+##                      393                        1                      290 
+##           Middle Village            Midland Beach                  Midtown 
+##                      100                        3                   625350 
+##      Morningside Heights           Morris Heights              Morris Park 
+##                    19741                      118                       64 
+##               Mott Haven              Murray Hill             New Brighton 
+##                     1309                   127663                       12 
+##             Nkew Gardens        North Sutton Area                  Oakwood 
+##                      459                    39678                        4 
+##               Park Slope              Parkchester           Queens Village 
+##                     3966                      113                       26 
+##          Queensboro Hill             Richmondtown                Ridgewood 
+##                       41                        3                      239 
+##                Riverdale              Saintalbans                     Soho 
+##                       53                       22                    78794 
+##                Soundview              South Beach              South Bronx 
+##                       89                        4                      421 
+##      Springfield Gardens           Spuyten Duyvil                 Steinway 
+##                       68                       17                        7 
+##               Sunny Side              Sunset Park            The Rockaways 
+##                    12493                      269                       34 
+##             Throggs Neck                Todt Hill                  Tremont 
+##                       33                        3                      109 
+##                  Tribeca               Union Port       University Heights 
+##                    63171                       58                       95 
+##          Upper East Side          Upper West Side                   Utopia 
+##                   513594                   313849                      391 
+## Wakefield-Williamsbridge       Washington Heights             West Village 
+##                       39                     4870                    90656 
+##    Westerleigh-Castleton          Williams Bridge             Williamsburg 
+##                        2                       26                    15521 
+##  Woodhaven-Richmond Hill        Woodlawn-Nordwood                 Woodside 
+##                      218                       25                     3151 
+##                Yorkville 
+##                    25353</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">harlem_pickups &lt;-<span class="st"> </span><span class="kw">filter</span>(taxi_df, <span class="kw">str_detect</span>(pickup_nhood, <span class="st">&quot;Harlem&quot;</span>))
+harlem_pickups</code></pre></div>
+<pre><code>## # A tibble: 32,025 × 16
+##    VendorID passenger_count trip_distance RateCodeID store_and_fwd_flag
+##       &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;      &lt;chr&gt;              &lt;chr&gt;
+## 1         1               1          0.70          1                  N
+## 2         1               1          1.10          1                  N
+## 3         2               1         18.79          2                  N
+## 4         2               1          4.66          1                  N
+## 5         2               5          0.67          1                  N
+## 6         2               3          0.76          1                  N
+## 7         1               1          2.70          1                  N
+## 8         2               1          3.19          1                  N
+## 9         2               1          0.85          1                  N
+## 10        2               2          6.06          1                  N
+## # ... with 32,015 more rows, and 11 more variables: payment_type &lt;chr&gt;,
+## #   fare_amount &lt;dbl&gt;, tip_amount &lt;dbl&gt;, tolls_amount &lt;dbl&gt;,
+## #   pickup_hour &lt;chr&gt;, pickup_dow &lt;chr&gt;, dropoff_hour &lt;chr&gt;,
+## #   dropoff_dow &lt;chr&gt;, pickup_nhood &lt;chr&gt;, dropoff_nhood &lt;chr&gt;,
+## #   kSplits &lt;chr&gt;</code></pre>
+</section><section id="select-a-set-of-columns" class="slide level2">
+<h1>Select a set of columns</h1>
+<ul>
+<li class="fragment">You can use the <code>select()</code> verb to specify which columns of a dataset you want</li>
+<li class="fragment">This is similar to the <code>keep</code> option in SAS’s data step.</li>
+<li class="fragment">Use a colon <code>:</code> to select all the columns between two variables (inclusive)</li>
+<li class="fragment">Use <code>contains</code> to take any columns containing a certain word/phrase/character</li>
+</ul>
+</section><section id="select-example" class="slide level2">
+<h1>Select Example</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(taxi_df, pickup_nhood, dropoff_nhood, 
+       fare_amount, dropoff_hour, trip_distance)</code></pre></div>
+<pre><code>## # A tibble: 3,770,319 × 5
+##           pickup_nhood      dropoff_nhood fare_amount dropoff_hour
+##                  &lt;chr&gt;              &lt;chr&gt;       &lt;dbl&gt;        &lt;chr&gt;
+## 1  Morningside Heights   Hamilton Heights         9.5         6-10
+## 2              Midtown            Midtown         6.5         6-10
+## 3      Lower East Side               Soho         7.0         6-10
+## 4   Financial District Financial District         3.0         6-10
+## 5              Chelsea       West Village         5.5         6-10
+## 6      Upper East Side             Harlem         9.5         10-5
+## 7           Fort Green               Soho        12.5         12-4
+## 8      Upper East Side    Upper East Side         4.0         12-4
+## 9      Upper West Side    Upper West Side         5.0         12-4
+## 10                &lt;NA&gt;            Clinton        52.0         12-4
+## # ... with 3,770,309 more rows, and 1 more variables: trip_distance &lt;dbl&gt;</code></pre>
+</section><section id="select-other-options" class="slide level2">
+<h1>Select: Other Options</h1>
+<dl>
+<dt class="fragment">starts_with(x, ignore.case = FALSE)</dt>
+<dd class="fragment"><p>name starts with <code>x</code></p>
+</dd>
+<dt class="fragment">ends_with(x, ignore.case = FALSE)</dt>
+<dd class="fragment"><p>name ends with <code>x</code></p>
+</dd>
+<dt class="fragment">matches(x, ignore.case = FALSE)</dt>
+<dd class="fragment"><p>selects all variables whose name matches the regular expression <code>x</code></p>
+</dd>
+<dt class="fragment">num_range(“V”, 1:5, width = 1)</dt>
+<dd class="fragment"><p>selects all variables (numerically) from <code>V1</code> to <code>V5</code>.</p>
+</dd>
+</dl>
+<ul>
+<li class="fragment">You can also use a <code>-</code> to drop variables.</li>
+</ul>
+</section><section id="reordering-data" class="slide level2">
+<h1>Reordering Data</h1>
+<ul>
+<li class="fragment">You can reorder your dataset based on conditions using the <code>arrange()</code> verb</li>
+<li class="fragment">Use the <code>desc</code> function to sort in descending order rather than ascending order (default)</li>
+</ul>
+</section><section id="arrange" class="slide level2">
+<h1>Arrange</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(<span class="kw">arrange</span>(taxi_df, <span class="kw">desc</span>(fare_amount), pickup_nhood), 
+       fare_amount, pickup_nhood)</code></pre></div>
+<pre><code>## # A tibble: 3,770,319 × 2
+##    fare_amount    pickup_nhood
+##          &lt;dbl&gt;           &lt;chr&gt;
+## 1      3130.30    Borough Park
+## 2      3130.30 Upper West Side
+## 3       990.00            &lt;NA&gt;
+## 4       900.00    Little Italy
+## 5       900.00            &lt;NA&gt;
+## 6       630.01         Chelsea
+## 7       600.00    Throggs Neck
+## 8       500.00       Chinatown
+## 9       500.00       Chinatown
+## 10      500.00         Clinton
+## # ... with 3,770,309 more rows</code></pre>
+</section><section id="exercise-1" class="slide level2">
+<h1>Exercise</h1>
+<p>Use <code>arrange()</code> to sort on the basis of <code>tip_amount</code>, <code>dropoff_nhood</code>, and <code>pickup_dow</code>, with descending order for tip amount</p>
+</section><section id="summary" class="slide level2">
+<h1>Summary</h1>
+<dl>
+<dt class="fragment">filter</dt>
+<dd class="fragment"><p>Extract subsets of rows. See also <code>slice()</code></p>
+</dd>
+<dt class="fragment">select</dt>
+<dd class="fragment"><p>Extract subsets of columns. See also <code>rename()</code></p>
+</dd>
+<dt class="fragment">arrange</dt>
+<dd class="fragment"><p>Sort your data</p>
+</dd>
+</dl>
+</section></section>
+<section><section id="data-aggregations-and-transformations" class="titleslide slide level1"><h1>Data Aggregations and Transformations</h1></section><section id="transformations" class="slide level2">
+<h1>Transformations</h1>
+<ul>
+<li class="fragment">The <code>mutate()</code> verb can be used to make new columns</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_df &lt;-<span class="st"> </span><span class="kw">mutate</span>(taxi_df, <span class="dt">tip_pct =</span> tip_amount/fare_amount)
+<span class="kw">select</span>(taxi_df, tip_pct, fare_amount, tip_amount)</code></pre></div>
+<pre><code>## # A tibble: 3,770,319 × 3
+##      tip_pct fare_amount tip_amount
+##        &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+## 1  0.0000000         9.5       0.00
+## 2  0.2384615         6.5       1.55
+## 3  0.2371429         7.0       1.66
+## 4  0.0000000         3.0       0.00
+## 5  0.2363636         5.5       1.30
+## 6  0.2273684         9.5       2.16
+## 7  0.2000000        12.5       2.50
+## 8  0.2500000         4.0       1.00
+## 9  0.2000000         5.0       1.00
+## 10 0.2755769        52.0      14.33
+## # ... with 3,770,309 more rows</code></pre>
+</section><section id="summarise-data-by-groups" class="slide level2">
+<h1>Summarise Data by Groups</h1>
+<ul>
+<li class="fragment">The <code>group_by</code> verb creates a grouping by a categorical variable</li>
+<li class="fragment">Functions can be placed inside <code>summarise</code> to create summary functions</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarise</span>(<span class="kw">group_by</span>(taxi_df, dropoff_nhood), 
+          <span class="dt">Num =</span> <span class="kw">n</span>(), <span class="dt">ave_tip_pct =</span> <span class="kw">mean</span>(tip_pct))</code></pre></div>
+<pre><code>## # A tibble: 122 × 3
+##               dropoff_nhood   Num ave_tip_pct
+##                       &lt;chr&gt; &lt;int&gt;       &lt;dbl&gt;
+## 1                 Annandale    16  0.16486695
+## 2             Ardon Heights    16  0.15149972
+## 3  Astoria-Long Island City 34728  0.11710247
+## 4                Auburndale   424  0.09363095
+## 5              Battery Park 32618  0.14849849
+## 6                 Bay Ridge  3171  0.14507851
+## 7                Baychester   168  0.06078747
+## 8              Bedford Park  1028  0.08187483
+## 9        Bedford-Stuyvesant 17382  0.12722678
+## 10              Bensonhurst  1081  0.12771086
+## # ... with 112 more rows</code></pre>
+</section><section id="group-by-neighborhoods-example" class="slide level2">
+<h1>Group By Neighborhoods Example</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarise</span>(<span class="kw">group_by</span>(taxi_df, pickup_nhood, dropoff_nhood), 
+          <span class="dt">Num =</span> <span class="kw">n</span>(), <span class="dt">ave_tip_pct =</span> <span class="kw">mean</span>(tip_pct))</code></pre></div>
+<pre><code>## Source: local data frame [5,224 x 4]
+## Groups: pickup_nhood [?]
+## 
+##                pickup_nhood            dropoff_nhood   Num ave_tip_pct
+##                       &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt;       &lt;dbl&gt;
+## 1             Ardon Heights            Ardon Heights     1  0.00000000
+## 2  Astoria-Long Island City Astoria-Long Island City  6714  0.09712743
+## 3  Astoria-Long Island City               Auburndale    13  0.06520367
+## 4  Astoria-Long Island City             Battery Park    14  0.10140865
+## 5  Astoria-Long Island City                Bay Ridge     5  0.15388657
+## 6  Astoria-Long Island City             Bedford Park     3  0.05550679
+## 7  Astoria-Long Island City       Bedford-Stuyvesant    68  0.09819024
+## 8  Astoria-Long Island City              Bensonhurst     2  0.00000000
+## 9  Astoria-Long Island City              Boerum Hill    12  0.09941085
+## 10 Astoria-Long Island City             Borough Park     9  0.08205749
+## # ... with 5,214 more rows</code></pre>
+</section><section id="chainingpiping" class="slide level2">
+<h1>Chaining/Piping</h1>
+<ul>
+<li class="fragment">A <code>dplyr</code> installation includes the <code>magrittr</code> package as a dependency</li>
+<li class="fragment">The <code>magrittr</code> package includes a pipe operator that allows you to pass the current dataset to another function</li>
+<li class="fragment">This makes interpreting a nested sequence of operations much easier to understand</li>
+</ul>
+</section><section id="standard-code" class="slide level2">
+<h1>Standard Code</h1>
+<ul>
+<li class="fragment">Code is executed inside-out.</li>
+<li class="fragment">Let’s arrange the above average tips in descending order, and only look at the locations that had at least 10 dropoffs and pickups.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(<span class="kw">arrange</span>(<span class="kw">summarise</span>(<span class="kw">group_by</span>(taxi_df, pickup_nhood, dropoff_nhood), <span class="dt">Num =</span> <span class="kw">n</span>(), <span class="dt">ave_tip_pct =</span> <span class="kw">mean</span>(tip_pct)), <span class="kw">desc</span>(ave_tip_pct)), Num &gt;=<span class="st"> </span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## Source: local data frame [2,620 x 4]
+## Groups: pickup_nhood [86]
+## 
+##                pickup_nhood            dropoff_nhood   Num ave_tip_pct
+##                       &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt;       &lt;dbl&gt;
+## 1              Kings Bridge             Kings Bridge    11   1.2256871
+## 2           Upper East Side              Brownsville    23   0.9447013
+## 3                 Bay Ridge                Bay Ridge    60   0.7915420
+## 4             The Rockaways            The Rockaways    33   0.7828405
+## 5  Gravesend-Sheepshead Bay Gravesend-Sheepshead Bay    80   0.5122171
+## 6                      &lt;NA&gt;                     &lt;NA&gt; 27834   0.4725437
+## 7               Bensonhurst              Bensonhurst    59   0.4512018
+## 8           Upper East Side           Spuyten Duyvil    65   0.3463543
+## 9                      Soho               Mott Haven    12   0.3239580
+## 10             Bedford Park             Bedford Park    30   0.3078915
+## # ... with 2,610 more rows</code></pre>
+</section><section class="slide level2">
+
+<p><img src="http://www.ohmagif.com/wp-content/uploads/2015/01/lemme-go-out-for-a-walk-oh-no-shit.gif" alt="damn" /></p>
+</section><section id="reformatted" class="slide level2">
+<h1>Reformatted</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(
+  <span class="kw">arrange</span>(
+    <span class="kw">summarise</span>(
+      <span class="kw">group_by</span>(taxi_df, 
+               pickup_nhood, dropoff_nhood), 
+      <span class="dt">Num =</span> <span class="kw">n</span>(), 
+      <span class="dt">ave_tip_pct =</span> <span class="kw">mean</span>(tip_pct)), 
+    <span class="kw">desc</span>(ave_tip_pct)), 
+  Num &gt;=<span class="st"> </span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## Source: local data frame [2,620 x 4]
+## Groups: pickup_nhood [86]
+## 
+##                pickup_nhood            dropoff_nhood   Num ave_tip_pct
+##                       &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt;       &lt;dbl&gt;
+## 1              Kings Bridge             Kings Bridge    11   1.2256871
+## 2           Upper East Side              Brownsville    23   0.9447013
+## 3                 Bay Ridge                Bay Ridge    60   0.7915420
+## 4             The Rockaways            The Rockaways    33   0.7828405
+## 5  Gravesend-Sheepshead Bay Gravesend-Sheepshead Bay    80   0.5122171
+## 6                      &lt;NA&gt;                     &lt;NA&gt; 27834   0.4725437
+## 7               Bensonhurst              Bensonhurst    59   0.4512018
+## 8           Upper East Side           Spuyten Duyvil    65   0.3463543
+## 9                      Soho               Mott Haven    12   0.3239580
+## 10             Bedford Park             Bedford Park    30   0.3078915
+## # ... with 2,610 more rows</code></pre>
+</section><section id="magrittr" class="slide level2">
+<h1>Magrittr</h1>
+<p><img src="https://github.com/smbache/magrittr/raw/master/inst/logo.png" /></p>
+<ul>
+<li class="fragment">Inspired by unix <code>|</code>, and F# forward pipe <code>|&gt;</code>, <code>magrittr</code> introduces the funny character (<code>%&gt;%</code>, the <em>then</em> operator)</li>
+<li class="fragment"><code>%&gt;%</code> pipes the object on the left hand side to the first argument of the function on the right hand side</li>
+<li class="fragment">Every function in <code>dplyr</code> has a slot for <code>data.frame/tbl</code> as it’s first argument, so this works beautifully!</li>
+</ul>
+</section><section id="put-that-function-in-your-pipe-and" class="slide level2">
+<h1>Put that Function in Your Pipe and…</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(pickup_nhood, dropoff_nhood) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Num =</span> <span class="kw">n</span>(),
+            <span class="dt">ave_tip_pct =</span> <span class="kw">mean</span>(tip_pct)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ave_tip_pct)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Num &gt;=<span class="st"> </span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## Source: local data frame [2,620 x 4]
+## Groups: pickup_nhood [86]
+## 
+##                pickup_nhood            dropoff_nhood   Num ave_tip_pct
+##                       &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt;       &lt;dbl&gt;
+## 1              Kings Bridge             Kings Bridge    11   1.2256871
+## 2           Upper East Side              Brownsville    23   0.9447013
+## 3                 Bay Ridge                Bay Ridge    60   0.7915420
+## 4             The Rockaways            The Rockaways    33   0.7828405
+## 5  Gravesend-Sheepshead Bay Gravesend-Sheepshead Bay    80   0.5122171
+## 6                      &lt;NA&gt;                     &lt;NA&gt; 27834   0.4725437
+## 7               Bensonhurst              Bensonhurst    59   0.4512018
+## 8           Upper East Side           Spuyten Duyvil    65   0.3463543
+## 9                      Soho               Mott Haven    12   0.3239580
+## 10             Bedford Park             Bedford Park    30   0.3078915
+## # ... with 2,610 more rows</code></pre>
+</section><section class="slide level2">
+
+<p><img src="http://i.giphy.com/lF1XZv45kIwMw.gif" alt="hellyeah" /></p>
+</section><section id="pipe-group_by" class="slide level2">
+<h1>Pipe + group_by()</h1>
+<ul>
+<li class="fragment">The pipe operator is very helpful for group by summaries</li>
+<li class="fragment">Let’s calculate average tip amount, and average trip distance, controlling for dropoff day of the week and dropoff location</li>
+<li class="fragment">First filter with the vector <code>manhattan_hoods</code></li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mht_url &lt;-<span class="st"> &quot;http://alizaidi.blob.core.windows.net/training/manhattan.rds&quot;</span>
+manhattan_hoods &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">gzcon</span>(<span class="kw">url</span>(mht_url)))
+taxi_df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(pickup_nhood %in%<span class="st"> </span>manhattan_hoods,
+         dropoff_nhood %in%<span class="st"> </span>manhattan_hoods) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(dropoff_nhood, pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ave_tip =</span> <span class="kw">mean</span>(tip_pct), 
+            <span class="dt">ave_dist =</span> <span class="kw">mean</span>(trip_distance)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(ave_dist &gt;<span class="st"> </span><span class="dv">3</span>, ave_tip &gt;<span class="st"> </span><span class="fl">0.05</span>)</code></pre></div>
+<pre><code>## Source: local data frame [398 x 4]
+## Groups: dropoff_nhood [27]
+## 
+##    dropoff_nhood     pickup_nhood    ave_tip  ave_dist
+##            &lt;chr&gt;            &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1   Battery Park     Central Park 0.12694563  6.149281
+## 2   Battery Park          Clinton 0.11996579  4.016902
+## 3   Battery Park      East Harlem 0.07116177 10.124000
+## 4   Battery Park     East Village 0.14717019  3.537367
+## 5   Battery Park Garment District 0.13463903  3.965532
+## 6   Battery Park         Gramercy 0.14396885  4.153174
+## 7   Battery Park Hamilton Heights 0.06770436  8.843571
+## 8   Battery Park           Harlem 0.13829591  9.039286
+## 9   Battery Park           Inwood 0.18235294 11.950000
+## 10  Battery Park          Midtown 0.13428280  5.496734
+## # ... with 388 more rows</code></pre>
+</section><section id="pipe-and-plot" class="slide level2">
+<h1>Pipe and Plot</h1>
+<p>Piping is not limited to dplyr functions, can be used everywhere!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+taxi_df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(pickup_nhood %in%<span class="st"> </span>manhattan_hoods,
+         dropoff_nhood %in%<span class="st"> </span>manhattan_hoods) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(dropoff_nhood, pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ave_tip =</span> <span class="kw">mean</span>(tip_pct), 
+            <span class="dt">ave_dist =</span> <span class="kw">mean</span>(trip_distance)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(ave_dist &gt;<span class="st"> </span><span class="dv">3</span>, ave_tip &gt;<span class="st"> </span><span class="fl">0.05</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> pickup_nhood, <span class="dt">y =</span> dropoff_nhood)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> ave_tip), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme_bw</span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>),
+          <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>) +
+<span class="st">    </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;steelblue&quot;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<p><img src="1-intro-to-R_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
+</section><section id="piping-to-other-arguments" class="slide level2">
+<h1>Piping to other arguments</h1>
+<ul>
+<li class="fragment">Although <code>dplyr</code> takes great care to make it particularly amenable to piping, other functions may not reserve the first argument to the object you are passing into it.</li>
+<li class="fragment">You can use the special <code>.</code> placeholder to specify where the object should enter</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(pickup_nhood %in%<span class="st"> </span>manhattan_hoods,
+         dropoff_nhood %in%<span class="st"> </span>manhattan_hoods) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(dropoff_nhood, pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ave_tip =</span> <span class="kw">mean</span>(tip_pct), 
+            <span class="dt">ave_dist =</span> <span class="kw">mean</span>(trip_distance)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(ave_tip ~<span class="st"> </span>ave_dist, <span class="dt">data =</span> .) -&gt;<span class="st"> </span>taxi_model
+<span class="kw">summary</span>(taxi_model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ave_tip ~ ave_dist, data = .)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.112258 -0.010882  0.002727  0.014168  0.140976 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.1324307  0.0016071  82.402  &lt; 2e-16 ***
+## ave_dist    -0.0017345  0.0003004  -5.773 1.15e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.02468 on 724 degrees of freedom
+## Multiple R-squared:  0.04401,    Adjusted R-squared:  0.04269 
+## F-statistic: 33.33 on 1 and 724 DF,  p-value: 1.153e-08</code></pre>
+</section><section id="exercise-2" class="slide level2">
+<h1>Exercise</h1>
+<p>Your turn:</p>
+<ul>
+<li class="fragment">Use the pipe operator to group by day of week and dropoff neighborhood</li>
+<li class="fragment">Filter to Manhattan neighborhoods</li>
+<li class="fragment">Make tile plot with average fare amount in dollars as the fill</li>
+</ul>
+</section></section>
+<section><section id="functional-programming" class="titleslide slide level1"><h1>Functional Programming</h1></section><section id="creating-functional-pipelines" class="slide level2">
+<h1>Creating Functional Pipelines</h1>
+<h3 id="too-many-pipes">Too Many Pipes?</h3>
+<p><img src="http://www.ohmagif.com/wp-content/uploads/2015/02/the-scariest-electrical-repair-ever.gif" alt="whoaaaaaaaaahhhhh" /></p>
+</section><section class="slide level2">
+
+<h3 id="reusable-code">Reusable code</h3>
+<ul>
+<li class="fragment">The examples above create a rather messy pipeline operation</li>
+<li class="fragment">Can be very hard to debug</li>
+<li class="fragment">The operation is pretty readable, but lacks reusability</li>
+<li class="fragment">Since R is a functional language, we benefit by splitting these operations into functions and calling them separately</li>
+<li class="fragment">This allows resuability; don’t write the same code twice!</li>
+</ul>
+</section><section id="functional-pipelines" class="slide level2">
+<h1>Functional Pipelines</h1>
+<h3 id="summarization">Summarization</h3>
+<ul>
+<li class="fragment">Let’s create a function that takes an argument for the data, and applies the summarization by neighborhood to calculate average tip and trip distance</li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_hood_sum &lt;-<span class="st"> </span>function(<span class="dt">taxi_data =</span> taxi_df) {
+  
+  mht_url &lt;-<span class="st"> &quot;http://alizaidi.blob.core.windows.net/training/manhattan.rds&quot;</span>
+  
+  manhattan_hoods &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">gzcon</span>(<span class="kw">url</span>(mht_url)))
+  taxi_data %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(pickup_nhood %in%<span class="st"> </span>manhattan_hoods,
+           dropoff_nhood %in%<span class="st"> </span>manhattan_hoods) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(dropoff_nhood, pickup_nhood) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">ave_tip =</span> <span class="kw">mean</span>(tip_pct), 
+              <span class="dt">ave_dist =</span> <span class="kw">mean</span>(trip_distance)) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(ave_dist &gt;<span class="st"> </span><span class="dv">3</span>, ave_tip &gt;<span class="st"> </span><span class="fl">0.05</span>) -&gt;<span class="st"> </span>sum_df
+  
+  <span class="kw">return</span>(sum_df)
+  
+}</code></pre></div>
+</section><section id="functional-pipelines-1" class="slide level2">
+<h1>Functional Pipelines</h1>
+<h3 id="plotting-function">Plotting Function</h3>
+<ul>
+<li class="fragment">We can create a second function for the plot</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tile_plot_hood &lt;-<span class="st"> </span>function(<span class="dt">df =</span> <span class="kw">taxi_hood_sum</span>()) {
+  
+  <span class="kw">library</span>(ggplot2)
+  
+  <span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x =</span> pickup_nhood, <span class="dt">y =</span> dropoff_nhood)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> ave_tip), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme_bw</span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>),
+          <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>) +
+<span class="st">    </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;steelblue&quot;</span>) -&gt;<span class="st"> </span>gplot
+  
+  <span class="kw">return</span>(gplot)
+}</code></pre></div>
+</section><section id="calling-our-pipeline" class="slide level2">
+<h1>Calling Our Pipeline</h1>
+<ul>
+<li class="fragment">Now we can create our plot by simply calling our two functions</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">taxi_hood_sum</span>(taxi_df) %&gt;%<span class="st"> </span>tile_plot_hood</code></pre></div>
+<p><img src="1-intro-to-R_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Let’s make that baby interactive.</p>
+</section><section id="creating-complex-pipelines-with-do" class="slide level2">
+<h1>Creating Complex Pipelines with do</h1>
+<ul>
+<li class="fragment">The <code>summarize</code> function is fun, can summarize many numeric/scalar quantities</li>
+<li class="fragment">But what if you want multiple values/rows back, not just a scalar summary?</li>
+<li class="fragment">Meet the <code>do</code> verb – arbitrary <code>tbl</code> operations</li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_df %&gt;%<span class="st"> </span><span class="kw">group_by</span>(dropoff_dow) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(dropoff_nhood), !<span class="kw">is.na</span>(pickup_nhood)) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(tip_pct)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">do</span>(<span class="kw">slice</span>(., <span class="dv">1</span>:<span class="dv">2</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(dropoff_dow, tip_amount, tip_pct, 
+         fare_amount, dropoff_nhood, pickup_nhood)</code></pre></div>
+<pre><code>## Source: local data frame [14 x 6]
+## Groups: dropoff_dow [7]
+## 
+##    dropoff_dow tip_amount    tip_pct fare_amount      dropoff_nhood
+##          &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;              &lt;chr&gt;
+## 1          Fri       7.00  116.66667        0.06  Greenwich Village
+## 2          Fri     454.00   64.85714        7.00 Bedford-Stuyvesant
+## 3          Mon       5.00  100.00000        0.05       West Village
+## 4          Mon      55.70   22.28000        2.50      The Rockaways
+## 5          Sat      15.00 1500.00000        0.01    Upper West Side
+## 6          Sat      10.00 1000.00000        0.01            Midtown
+## 7          Sun     100.00   22.22222        4.50    Upper West Side
+## 8          Sun     125.25   17.89286        7.00   Garment District
+## 9          Thu      66.65   26.66000        2.50    Upper East Side
+## 10         Thu      93.18   20.70667        4.50   Hamilton Heights
+## 11         Tue      11.99 1199.00000        0.01            Chelsea
+## 12         Tue      62.00   24.80000        2.50       Battery Park
+## 13         Wed     121.25   26.94444        4.50            Clinton
+## 14         Wed      57.00   22.80000        2.50            Midtown
+## # ... with 1 more variables: pickup_nhood &lt;chr&gt;</code></pre>
+</section><section id="estimating-multiple-models-with-do" class="slide level2">
+<h1>Estimating Multiple Models with do</h1>
+<ul>
+<li class="fragment">A common use of <code>do</code> is to calculate many different models by a grouping variable</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_df %&gt;%<span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">10</span>^<span class="dv">4</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(dropoff_dow) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">do</span>(<span class="dt">lm_tip =</span> <span class="kw">lm</span>(tip_pct ~<span class="st"> </span>pickup_nhood +<span class="st"> </span>passenger_count +<span class="st"> </span>pickup_hour,
+     <span class="dt">data =</span> .))</code></pre></div>
+<pre><code>## Source: local data frame [7 x 2]
+## Groups: &lt;by row&gt;
+## 
+## # A tibble: 7 × 2
+##   dropoff_dow   lm_tip
+## *       &lt;chr&gt;   &lt;list&gt;
+## 1         Fri &lt;S3: lm&gt;
+## 2         Mon &lt;S3: lm&gt;
+## 3         Sat &lt;S3: lm&gt;
+## 4         Sun &lt;S3: lm&gt;
+## 5         Thu &lt;S3: lm&gt;
+## 6         Tue &lt;S3: lm&gt;
+## 7         Wed &lt;S3: lm&gt;</code></pre>
+</section><section class="slide level2">
+
+<p>Where are our results? <img src="http://i.giphy.com/oEnTTI3ZdK6ic.gif" alt="digging" /></p>
+</section><section id="cleaning-output" class="slide level2">
+<h1>Cleaning Output</h1>
+<ul>
+<li class="fragment">By design, every function in <code>dplyr</code> returns a <code>data.frame</code></li>
+<li class="fragment">In the example above, we get back a spooky <code>data.frame</code> with a column of <code>S3</code> <code>lm</code> objects</li>
+<li class="fragment">You can still modify each element as you would normally, or pass it to a <code>mutate</code> function to extract intercept or statistics</li>
+<li class="fragment">But there’s also a very handy <code>broom</code> package for cleaning up such objects into <code>data.frames</code></li>
+</ul>
+</section><section id="brooming-up-the-mess" class="slide level2">
+<h1>Brooming Up the Mess</h1>
+<h3 id="model-metrics">Model Metrics</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+taxi_df %&gt;%<span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">10</span>^<span class="dv">5</span>) %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw">group_by</span>(dropoff_dow) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">do</span>(<span class="kw">glance</span>(<span class="kw">lm</span>(tip_pct ~<span class="st"> </span>pickup_nhood +<span class="st"> </span>passenger_count +<span class="st"> </span>pickup_hour,
+     <span class="dt">data =</span> .)))</code></pre></div>
+<pre><code>## Source: local data frame [7 x 12]
+## Groups: dropoff_dow [7]
+## 
+##   dropoff_dow   r.squared adj.r.squared     sigma statistic      p.value
+##         &lt;chr&gt;       &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+## 1         Fri 0.012864767   0.008113777 0.1761057 2.7078077 5.260343e-13
+## 2         Mon 0.025077627   0.019732658 0.1291271 4.6918188 3.232969e-32
+## 3         Sat 0.002554994  -0.001747105 0.3448431 0.5938947 9.966492e-01
+## 4         Sun 0.017883598   0.012394358 0.1312927 3.2579373 7.092899e-19
+## 5         Thu 0.013374484   0.008795209 0.1548958 2.9206556 3.220142e-14
+## 6         Tue 0.010055232   0.005068104 0.1878385 2.0162372 3.003607e-06
+## 7         Wed 0.018359260   0.013595505 0.1326060 3.8539476 2.520699e-22
+## # ... with 6 more variables: df &lt;int&gt;, logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;,
+## #   deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<h3 id="model-coefficients">Model Coefficients</h3>
+<p>The most commonly used function in the <code>broom</code> package is the <code>tidy</code> function. This will expand our data.frame and give us the model coefficients</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxi_df %&gt;%<span class="st"> </span><span class="kw">sample_n</span>(<span class="dv">10</span>^<span class="dv">5</span>) %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw">group_by</span>(dropoff_dow) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">do</span>(<span class="kw">tidy</span>(<span class="kw">lm</span>(tip_pct ~<span class="st"> </span>pickup_nhood +<span class="st"> </span>passenger_count +<span class="st"> </span>pickup_hour,
+     <span class="dt">data =</span> .)))</code></pre></div>
+<pre><code>## Source: local data frame [458 x 6]
+## Groups: dropoff_dow [7]
+## 
+##    dropoff_dow                           term      estimate  std.error
+##          &lt;chr&gt;                          &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;
+## 1          Fri                    (Intercept)  0.1308501115 0.01935745
+## 2          Fri       pickup_nhoodBattery Park  0.0224420372 0.02454915
+## 3          Fri          pickup_nhoodBay Ridge  7.3125673626 0.11601645
+## 4          Fri pickup_nhoodBedford-Stuyvesant -0.0523070856 0.06876425
+## 5          Fri        pickup_nhoodBensonhurst -0.1296439134 0.16296551
+## 6          Fri        pickup_nhoodBoerum Hill -0.0009372393 0.04365824
+## 7          Fri       pickup_nhoodBorough Park  0.0061098822 0.08313886
+## 8          Fri           pickup_nhoodBushwick  0.0115772487 0.06878946
+## 9          Fri      pickup_nhoodCarnegie Hill  0.0035406892 0.02246441
+## 10         Fri    pickup_nhoodCarroll Gardens  0.0282658929 0.04014668
+## # ... with 448 more rows, and 2 more variables: statistic &lt;dbl&gt;,
+## #   p.value &lt;dbl&gt;</code></pre>
+</section><section id="summary-1" class="slide level2">
+<h1>Summary</h1>
+<dl>
+<dt class="fragment">mutate</dt>
+<dd class="fragment"><p>Create transformations</p>
+</dd>
+<dt class="fragment">summarise</dt>
+<dd class="fragment"><p>Aggregate</p>
+</dd>
+<dt class="fragment">group_by</dt>
+<dd class="fragment"><p>Group your dataset by levels</p>
+</dd>
+<dt class="fragment">do</dt>
+<dd class="fragment"><p>Evaluate complex operations on a tbl</p>
+</dd>
+</dl>
+<p>Chaining with the <code>%&gt;%</code> operator can result in more readable code.</p>
+</section><section id="what-we-didnt-cover" class="slide level2">
+<h1>What We Didn’t Cover</h1>
+<ul>
+<li class="fragment">There are many additional topics that fit well into the <code>dplyr</code> and functional programming landscape</li>
+<li class="fragment">There are too many to cover in one session. Fortunately, most are well documented. The most notable omissions:</li>
+</ul>
+<ol type="1">
+<li class="fragment">Connecting to remote databases, see <code>vignette('databases', package = 'dplyr')</code></li>
+<li class="fragment">Merging and Joins, see <code>vignette('two-table', package = 'dplyr')</code></li>
+<li class="fragment">Programming with <code>dplyr</code>,<code>vignette('nse', package = 'dplyr')</code></li>
+<li class="fragment"><code>summarize_each</code> and <code>mutate_each</code></li>
+</ol>
+</section><section id="thanks-for-attending" class="slide level2">
+<h1>Thanks for Attending!</h1>
+<ul>
+<li class="fragment">Any questions?</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="1-intro-to-R_files/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="1-intro-to-R_files/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '1-intro-to-R_files/reveal.js-3.3.0/plugin/notes/notes.js', async: true },
+          { src: '1-intro-to-R_files/reveal.js-3.3.0/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
