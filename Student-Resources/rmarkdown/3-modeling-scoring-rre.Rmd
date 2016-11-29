@@ -252,8 +252,8 @@ default_model_tree <- estimate_model(mort_split$train,
                                      minBucket = 10,
                                      reportProgress = 0)
 summary(default_model_tree)
-# library(RevoTreeView)
-# plot(createTreeView(default_model_tree))
+library(RevoTreeView)
+plot(createTreeView(default_model_tree))
 
 ```
 
@@ -285,9 +285,9 @@ rxGetInfo(default_logit_scored, numRows = 2)
 ## Visualize Model Results
 
 ```{r roc_curve}
-rxRoc(actualVarName = "default", 
+plot(rxRoc(actualVarName = "default", 
       predVarNames ="pred_logit_default", 
-      data = default_logit_scored)
+      data = default_logit_scored))
 ```
 
 
@@ -330,9 +330,10 @@ Use the above functions and estimate a model for each of those algorithms, and a
 ## Starter code
 
 default_model_forest <- estimate_model(mort_split$train, 
-                                       model = rxDForest,
+                                       model = ?,
                                        nTree = 100,
-                                       importance = TRUE,
+                                       importance = ,
+                                       ### any other args?,
                                        reportProgress = 0)
 
 default_forest_scored <- rxPredict(default_model_forest,
@@ -344,9 +345,11 @@ default_forest_scored <- rxPredict(default_model_forest,
 ## same for rxBTrees
 
 default_model_gbm <- estimate_model(mort_split$train,
-                                    model = rxBTrees,
+                                    model = ,
                                     importance = TRUE,
-                                    nTree = 100, reportProgress = 0)
+                                    nTree = ,
+                                    ### any other args?,
+                                    reportProgress = 0)
 
 default_gbm_scored <- rxPredict(default_model_gbm,
                                   mort_split$validate,
