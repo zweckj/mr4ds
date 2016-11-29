@@ -23,7 +23,7 @@ The `RxSpark` and the Spark Compute contexts are completely distinct compute env
 ```{r save_csv}
 
 library(sparklyr)
-spark_write_csv(sample_taxi, 
+spark_write_csv(taxi_binary, 
                 path = file.path(data_path, 'sampleTaxi'))
 
 
