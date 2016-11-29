@@ -29,6 +29,14 @@ spark_write_csv(sample_taxi,
 
 ```
 
+Shut down the `sparklyr` application:
+
+```{r spark_disconnect}
+spark_disconnect(sc)
+
+```
+
+
 
 ## Remove SUCCESS dir
 
