@@ -166,3 +166,20 @@ sdf_conf_df <- function(predictions = score_dtree) {
 
 ```
 
+
+## Using the Spark ML Model Metric Functions
+
+
+```{r sparkml_metrics}
+
+dtree_auc <- ml_binary_classification_eval(predicted_tbl_spark = score_dtree, label = "good_tip", score = "probability")
+
+dforest_auc <- ml_binary_classification_eval(predicted_tbl_spark = score_dforest, label = "good_tip", score = "probability")
+
+
+### metric choices: c("f1", "precision", "recall", "weightedPrecision", "weightedRecall", "accuracy")
+
+dforest_accuracy <- ml_classification_eval(predicted_tbl_spark = score_dforest, label = "good_tip", predicted_lbl = "prediction", metric = "accuracy")
+
+```
+
