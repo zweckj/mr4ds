@@ -145,7 +145,7 @@ get_confusion <- function(scored_df = conf_df()) {
   
 }
 
-conf_tree <- get_confusion()
+# conf_tree <- get_confusion()
 
 ```
 
@@ -163,6 +163,36 @@ sdf_conf_df <- function(predictions = score_dtree) {
   return(conf_sdf)
   
 }
+
+sdf_conf_df()
+library(tidyr)
+
+conf_spread <- . %>% spread(key = "good_tip", value  = "n")
+
+dtree_conf <- sdf_conf_df() %>% collect %>% conf_spread
+
+dtree_conf <- dtree_conf[, 2:3]
+dtree_conf/sum(dtree_conf)
+```
+
+
+## Using the Spark ML Model Metric Functions
+
+
+```{r sparkml_metrics}
+
+dtree_auc <- ml_binary_classification_eval(predicted_tbl_spark = score_dtree, label = "good_tip", score = "probability")
+
+dforest_auc <- ml_binary_classification_eval(predicted_tbl_spark = score_dforest, label = "good_tip", score = "probability")
+
+
+### metric choices: c("f1", "precision", "recall", "weightedPrecision", "weightedRecall", "accuracy")
+
+dforest_accuracy <- ml_classification_eval(predicted_tbl_spark = score_dforest, label = "good_tip", predicted_lbl = "prediction", metric = "accuracy")
+
+dtree_auc
+dforest_auc
+dforest_accuracy
 
 ```
 
