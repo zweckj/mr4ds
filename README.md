@@ -7,10 +7,10 @@ Welcome to the Microsoft R for Data Science Course Repository. You can find the 
 
 ## Class Links
 
-+ [course webpage](https://akzaidi.github.io/R-cadence/)
++ [course webpage](https://azure.github.io/mr4ds/)
 + [gitter page](https://gitter.im/mr4ds/Lobby)
     * we are going to try and use gitter as a discussion forum for anything related to the course materials, and Microsoft R Server more generally
-+ [Course wiki](https://github.com/akzaidi/R-cadence/wiki)
++ [Course wiki](https://github.com/Azure/mr4ds/wiki)
     * the course wiki contains some instructions on how to install the class applications locally
     * it also contains the course syllabus
 + [Class Playlist](https://open.spotify.com/user/pakmanaz/playlist/02R6d9fLRwxI06EHcm2Mcs)
