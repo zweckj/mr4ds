@@ -171,6 +171,7 @@ conf_spread <- . %>% spread(key = "good_tip", value  = "n")
 
 dtree_conf <- sdf_conf_df() %>% collect %>% conf_spread
 
+# create ratios for confusion matrix
 dtree_conf <- dtree_conf[, 2:3]
 dtree_conf/sum(dtree_conf)
 ```
