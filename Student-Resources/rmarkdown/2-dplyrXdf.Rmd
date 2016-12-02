@@ -103,6 +103,7 @@ download.file("http://alizaidi.blob.core.windows.net/training/yellow_tripdata_20
 library(dplyrXdf)
 taxi_xdf <- RxXdfData(your_data)
 taxi_xdf %>% head
+taxi_xdf %>% nrow
 ```
 
 
@@ -124,7 +125,7 @@ by using the `rxDataStep` function in the `RevoScaleR` package included with you
 ---
 
 ```{r}
-taxi_xdf %>% rxGetInfo(getVarInfo = TRUE)
+taxi_xdf %>% rxGetInfo(getVarInfo = TRUE, numRows = 4)
 ```
 
 ---
@@ -136,7 +137,7 @@ taxi_transform <- RxXdfData(your_data)
 
 
 ```{r}
-system.time(taxi_transform <- rxDataStep(inData = taxi_xdf,
+system.time(rxDataStep(inData = taxi_xdf,
            outFile = taxi_transform,
            transforms = list(tip_pct = tip_amount/fare_amount),
            overwrite = TRUE))
@@ -173,7 +174,7 @@ taxi_transform@file
 ```
 
 ```{r}
-persist(taxi_transform, outFile = "taxiTransform.xdf") -> taxi_transform
+persist(taxi_transform, outFile = "/datadrive/alizaidi/taxiTransform.xdf") -> taxi_transform
 ```
 
 ## Using dplyrXdf for Aggregations 
@@ -185,7 +186,6 @@ persist(taxi_transform, outFile = "taxiTransform.xdf") -> taxi_transform
 ```{r}
 taxi_group <- taxi_transform %>%
   group_by(pickup_nhood) %>% 
-  summarize(ave_tip_pct = mean(tip_pct))
 taxi_group %>% head
 ```
 

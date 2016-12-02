@@ -414,7 +414,13 @@ num_range("V", 1:5, width = 1)
 ```{r}
 select(arrange(taxi_df, desc(fare_amount), pickup_nhood), 
        fare_amount, pickup_nhood)
+
+head(select(arrange(taxi_df, desc(fare_amount), pickup_nhood), 
+       fare_amount, pickup_nhood), 10)
 ```
+
+
+
 
 ## Exercise
 Use `arrange()` to  sort on the basis of `tip_amount`, `dropoff_nhood`, and `pickup_dow`, with descending order for tip amount
@@ -442,6 +448,7 @@ arrange
 ```{r}
 taxi_df <- mutate(taxi_df, tip_pct = tip_amount/fare_amount)
 select(taxi_df, tip_pct, fare_amount, tip_amount)
+transmute(taxi_df, tip_pct = tip_amount/fare_amount)
 ```
 
 ## Summarise Data by Groups
@@ -450,7 +457,14 @@ select(taxi_df, tip_pct, fare_amount, tip_amount)
 * Functions can be placed inside `summarise` to create summary functions
 
 ```{r}
-summarise(group_by(taxi_df, dropoff_nhood), 
+grouped_taxi <- group_by(taxi_df, dropoff_nhood)
+class(grouped_taxi)
+grouped_taxi
+```
+
+
+```{r}
+summarize(group_by(taxi_df, dropoff_nhood), 
           Num = n(), ave_tip_pct = mean(tip_pct))
 ```
 
@@ -676,7 +690,8 @@ tile_plot_hood <- function(df = taxi_hood_sum()) {
 * Now we can create our plot by simply calling our two functions
 
 ```{r, fig.height = 8, fig.width = 8}
-taxi_hood_sum(taxi_df) %>% tile_plot_hood
+library(plotly)
+taxi_hood_sum(taxi_df) %>% tile_plot_hood %>% ggplotly
 ```
 
 Let's make that baby interactive.
@@ -703,7 +718,7 @@ taxi_df %>% group_by(dropoff_dow) %>%
 * A common use of `do` is to calculate many different models by a grouping variable
 
 ```{r}
-taxi_df %>% sample_n(10^4) %>% 
+dow_lms <- taxi_df %>% sample_n(10^4) %>% 
   group_by(dropoff_dow) %>% 
   do(lm_tip = lm(tip_pct ~ pickup_nhood + passenger_count + pickup_hour,
      data = .))
@@ -711,10 +726,22 @@ taxi_df %>% sample_n(10^4) %>%
 
 ---
 
+```{r}
+dow_lms
+```
+
+
 Where are our results? 
 ![digging](http://i.giphy.com/oEnTTI3ZdK6ic.gif)
 
 ## Cleaning Output
+
+```{r}
+summary(dow_lms$lm_tip[[1]])
+library(broom)
+dow_lms %>% tidy(lm_tip)
+```
+
 
 * By design, every function in `dplyr` returns a `data.frame`
 * In the example above, we get back a spooky `data.frame` with a column of `S3` `lm` objects
