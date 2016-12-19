@@ -232,7 +232,7 @@ Check your CRAN mirror with `getOption("repos")`.
 + To find how the object is stored in memory, use `typeof` (_lower level representation_)
 + Good time to do Lab 0!
 
-# Data Manipulation with the dplyr Package
+# Data Manipulation with the `dplyr` Package
 
 ## Overview
 
