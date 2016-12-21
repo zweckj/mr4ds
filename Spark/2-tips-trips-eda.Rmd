@@ -6,7 +6,7 @@ The `sparklyr` package can be used in conjuction with the `dplyr` package. It ba
 ```{r mutate}
 library(dplyr)
 class(taxi)
-sample_taxi <-  mutate(taxi, tip_pct = tip_amount/fare_amount)
+sample_taxi <- mutate(taxi, tip_pct = tip_amount/fare_amount)
 
 ```
 

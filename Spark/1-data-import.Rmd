@@ -13,7 +13,7 @@ sc <- spark_connect(master = "yarn-client")
 
 ```{r download_data}
 
-download.file("https://alizaidi.blob.core.windows.net/training/sample_taxi.csv", "sample_taxi.csv")
+# download.file("https://alizaidi.blob.core.windows.net/training/sample_taxi.csv", "sample_taxi.csv")
 # or the larger data!
 download.file("http://alizaidi.blob.core.windows.net/training/taxi_large.csv", "taxi_large.csv")
 

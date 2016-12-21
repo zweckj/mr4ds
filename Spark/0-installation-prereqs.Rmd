@@ -6,7 +6,7 @@ Before we install the packages, let's make sure we are pulling from a recent mir
 
 r <- getOption('repos')
 # set mirror to something a bit more recent
-r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-10-24/"
+r["CRAN"] <- "https://mran.revolutionanalytics.com/snapshot/2016-12-19/"
 options(repos = r)
 
 
@@ -48,7 +48,6 @@ We'll need a couple of packages that are not yet avaialable on CRAN, but are ava
 
 
 install.packages('sparklyr')
-install.packages('rmarkdown')
 install.packages("plotly")
 
 # devtools::isntall_github("rstudio/htmltools")
