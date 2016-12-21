@@ -99,11 +99,51 @@ Now we use our `rxImport` function to import the csv into an xdf.
 
 ```{r csv_import_xdf}
 
-rxImport(inData = taxi_text, taxi_xdf, overwrite = TRUE)
+
+col_classes <- c('VendorID' = "factor",
+                 'passenger_count' = "integer",
+                 'trip_distance' = "numeric",
+                 'RateCodeID' = "factor",
+                 'store_and_fwd_flag' = "factor",
+                 'payment_type' = "factor",
+                 'fare_amount' = "numeric",
+                 'tip_amount' = "numeric",
+                 'tolls_amount' = "numeric",
+                 'pickup_hour' = "factor",
+                 'pickup_dow' = "factor", 
+                 'dropoff_hour' = "factor",
+                 'dropoff_dow' = "factor",
+                 'pickup_nhood' = "factor",
+                 'dropoff_nhood' = "factor",
+                 'kSplits' = "factor",
+                 'tip_pct' = "numeric",
+                 'good_tip' = "factor")
+
+rxImport(inData = taxi_text, taxi_xdf, overwrite = TRUE, colClasses = col_classes)
 rxGetInfo(taxi_xdf, getVarInfo = TRUE)
 
 
 ```
+
+## Simple EDA
+
+```{r eda_trips}
+
+tip_dist_df <- rxCube(tip_pct ~ pickup_hour + pickup_dow, 
+                      data = taxi_xdf, returnDataFrame = TRUE)
+
+library(ggplot2)
+library(magrittr)
+
+tip_dist_df %>% ggplot(aes(x = pickup_hour, y = pickup_dow, fill = tip_pct)) +
+  geom_tile() + theme_minimal() + 
+  scale_fill_continuous(label = scales::percent) +
+  labs(x = "Pickup Hour", y = "Pickup Day of Week", fill = "Tip Percent",
+      title = "Distribution of Tip Percents",
+      subtitle = "Do Passengers Tip More in the AM?")
+
+```
+
 
 # Creating Linear Models
 
